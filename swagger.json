@@ -997,13 +997,13 @@
           }
         }
       },
-      "PaymentResponse" : {
+      "NewPaymentResponse" : {
         "type" : "object",
         "required" : [ "OrderId", "TODO_CHANGE_FIELD_SUCCESS_LOGIC" ],
         "discriminator" : {
           "propertyName" : "TODO_CHANGE_FIELD_SUCCESS_LOGIC",
           "mapping" : {
-            "true" : "#/components/schemas/NewPaymentResponse",
+            "true" : "#/components/schemas/PaymentResponse",
             "false" : "#/components/schemas/FalsePaymentResponse",
             "3DS" : "#/components/schemas/3DSPaymentResponse",
             "Redirect" : "#/components/schemas/RedirectPaymentResponse"
@@ -1022,74 +1022,90 @@
           }
         }
       },
-      "NewPaymentResponse" : {
-        "type" : "object",
-        "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
-        "properties" : {
-          "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
-            "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
+      "PaymentResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
+          "properties" : {
+            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
+              "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
+            },
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            }
           }
-        }
+        } ]
       },
       "3DSPaymentResponse" : {
-        "type" : "object",
-        "required" : [ "acsUrl", "PaRes", "threeDSKey", "redirectUrl", "redirectParams", "redirectMethod" ],
-        "properties" : {
-          "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
-            "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
-          },
-          "acsUrl" : {
-            "$ref" : "#/components/schemas/acsUrl"
-          },
-          "PaRes" : {
-            "$ref" : "#/components/schemas/PaRes"
-          },
-          "threeDSKey" : {
-            "$ref" : "#/components/schemas/threeDSKey"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "acsUrl", "PaRes", "threeDSKey", "redirectUrl", "redirectParams", "redirectMethod" ],
+          "properties" : {
+            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
+              "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
+            },
+            "acsUrl" : {
+              "$ref" : "#/components/schemas/acsUrl"
+            },
+            "PaRes" : {
+              "$ref" : "#/components/schemas/PaRes"
+            },
+            "threeDSKey" : {
+              "$ref" : "#/components/schemas/threeDSKey"
+            }
           }
-        }
+        } ]
       },
       "RedirectPaymentResponse" : {
-        "type" : "object",
-        "required" : [ "TransactionId" ],
-        "properties" : {
-          "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
-            "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "TransactionId" ],
+          "properties" : {
+            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
+              "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
+            },
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            }
           }
-        }
+        } ]
       },
       "FalsePaymentResponse" : {
-        "type" : "object",
-        "required" : [ "ErrorResponse" ],
-        "properties" : {
-          "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
-            "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "ErrorResponse" ],
+          "properties" : {
+            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
+              "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
+            },
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
           }
-        }
+        } ]
       },
       "NewRebillResponse" : {
         "type" : "object",
