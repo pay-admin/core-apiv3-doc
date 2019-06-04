@@ -349,11 +349,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/ChargeResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalseChargeResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewChargeResponse"
                 }
               }
             }
@@ -389,11 +385,8 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/UnsubscribeResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalseUnsubscribeResponse"
-                  } ]
+                  "schema" : null,
+                  "$ref" : "#/components/schemas/NewUnsubscribeResponse"
                 }
               }
             }
@@ -429,11 +422,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/NewPayoutResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalsePayoutResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewPayoutResponse"
                 }
               }
             }
@@ -1366,12 +1355,12 @@
       },
       "UnsubscribeResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewChargeResponse"
+          "$ref" : "#/components/schemas/NewUnsubscribeResponse"
         } ]
       },
       "FalseUnsubscribeResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewChargeResponse"
+          "$ref" : "#/components/schemas/NewUnsubscribeResponse"
         }, {
           "type" : "object",
           "properties" : {
@@ -1383,40 +1372,56 @@
       },
       "NewPayoutResponse" : {
         "type" : "object",
+        "required" : [ "success", "OrderId" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/PayoutResponse",
+            "false" : "#/components/schemas/FalsePayoutResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
+            "description" : "success",
+            "type" : "string"
           },
           "OrderId" : {
             "$ref" : "#/components/schemas/OrderId"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_payout"
           }
         }
       },
-      "FalsePayoutResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "OrderId" : {
-            "$ref" : "#/components/schemas/OrderId"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+      "PayoutResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPayoutResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_payout"
+            }
           }
-        }
+        } ]
+      },
+      "FalsePayoutResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPayoutResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        } ]
       },
       "BalanceResponse" : {
         "type" : "object",
