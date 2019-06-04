@@ -1132,6 +1132,7 @@
           "$ref" : "#/components/schemas/NewRebillResponse"
         }, {
           "type" : "object",
+          "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
           "properties" : {
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
@@ -1148,9 +1149,6 @@
             "TransactionStatus" : {
               "$ref" : "#/components/schemas/TransactionStatus_pay"
             },
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
-            },
             "RebillId" : {
               "$ref" : "#/components/schemas/rebillId"
             }
@@ -1162,6 +1160,7 @@
           "$ref" : "#/components/schemas/NewRebillResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
@@ -1194,6 +1193,7 @@
           "$ref" : "#/components/schemas/NewRefundResponse"
         }, {
           "type" : "object",
+          "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus", "newAmount" ],
           "properties" : {
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
@@ -1212,12 +1212,6 @@
             },
             "newAmount" : {
               "$ref" : "#/components/schemas/newAmount"
-            },
-            "RebillId" : {
-              "$ref" : "#/components/schemas/rebillId"
-            },
-            "OrderId" : {
-              "$ref" : "#/components/schemas/OrderId"
             }
           }
         } ]
@@ -1227,6 +1221,7 @@
           "$ref" : "#/components/schemas/NewRefundResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
@@ -1259,6 +1254,7 @@
           "$ref" : "#/components/schemas/NewCancelResponse"
         }, {
           "type" : "object",
+          "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
           "properties" : {
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
@@ -1283,6 +1279,7 @@
           "$ref" : "#/components/schemas/NewCancelResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
@@ -1315,6 +1312,7 @@
           "$ref" : "#/components/schemas/NewChargeResponse"
         }, {
           "type" : "object",
+          "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus", "newAmount" ],
           "properties" : {
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
@@ -1345,6 +1343,7 @@
           "$ref" : "#/components/schemas/NewChargeResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
