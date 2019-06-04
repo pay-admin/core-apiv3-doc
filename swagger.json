@@ -1186,7 +1186,7 @@
       },
       "RefundResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewRebillResponse"
+          "$ref" : "#/components/schemas/NewRefundResponse"
         }, {
           "type" : "object",
           "properties" : {
@@ -1222,7 +1222,7 @@
       },
       "FalseRefundResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewRebillResponse"
+          "$ref" : "#/components/schemas/NewRefundResponse"
         }, {
           "type" : "object",
           "properties" : {
@@ -1257,7 +1257,7 @@
       },
       "CancelResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewRebillResponse"
+          "$ref" : "#/components/schemas/NewCancelResponse"
         }, {
           "type" : "object",
           "properties" : {
@@ -1284,7 +1284,7 @@
       },
       "FalseCancelResponse" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/NewRebillResponse"
+          "$ref" : "#/components/schemas/NewCancelResponse"
         }, {
           "type" : "object",
           "properties" : {
