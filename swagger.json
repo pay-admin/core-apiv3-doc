@@ -140,7 +140,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PaymentResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -176,15 +176,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/NewPaymentResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/3DSPaymentResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/RedirectPaymentResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalsePaymentResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -220,11 +212,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/RebillResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalseRebillResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewRebillResponse"
                 }
               }
             }
@@ -289,11 +277,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/RefundResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalseRefundResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewRefundResponse"
                 }
               }
             }
@@ -329,11 +313,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/CancelResponse"
-                  }, {
-                    "$ref" : "#/components/schemas/FalseCancelResponse"
-                  } ]
+                  "$ref" : "#/components/schemas/NewCancelResponse"
                 }
               }
             }
@@ -1100,6 +1080,7 @@
       },
       "RedirectPaymentResponse" : {
         "type" : "object",
+        "required" : [ "TransactionId" ],
         "properties" : {
           "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
             "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
@@ -1111,6 +1092,7 @@
       },
       "FalsePaymentResponse" : {
         "type" : "object",
+        "required" : [ "ErrorResponse" ],
         "properties" : {
           "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
             "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
@@ -1120,140 +1102,206 @@
           }
         }
       },
-      "RebillResponse" : {
+      "NewRebillResponse" : {
         "type" : "object",
+        "required" : [ "TransactionId", "success" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/RebillResponse",
+            "false" : "#/components/schemas/FalseRebillResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
+            "description" : "success",
+            "type" : "string"
           },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
-          },
-          "newAmount" : {
-            "$ref" : "#/components/schemas/newAmount"
-          },
-          "RebillId" : {
-            "$ref" : "#/components/schemas/rebillId"
           }
         }
       },
+      "RebillResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            },
+            "newAmount" : {
+              "$ref" : "#/components/schemas/newAmount"
+            },
+            "RebillId" : {
+              "$ref" : "#/components/schemas/rebillId"
+            }
+          }
+        } ]
+      },
       "FalseRebillResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        } ]
+      },
+      "NewRefundResponse" : {
         "type" : "object",
+        "required" : [ "TransactionId", "success" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/RefundResponse",
+            "false" : "#/components/schemas/FalseRefundResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
+            "description" : "success",
+            "type" : "string"
           },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
           }
         }
       },
       "RefundResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
-          },
-          "newAmount" : {
-            "$ref" : "#/components/schemas/newAmount"
-          },
-          "RebillId" : {
-            "$ref" : "#/components/schemas/rebillId"
-          },
-          "OrderId" : {
-            "$ref" : "#/components/schemas/OrderId"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            },
+            "newAmount" : {
+              "$ref" : "#/components/schemas/newAmount"
+            },
+            "RebillId" : {
+              "$ref" : "#/components/schemas/rebillId"
+            },
+            "OrderId" : {
+              "$ref" : "#/components/schemas/OrderId"
+            }
           }
-        }
+        } ]
       },
       "FalseRefundResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        } ]
+      },
+      "NewCancelResponse" : {
         "type" : "object",
+        "required" : [ "TransactionId", "success" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/CancelResponse",
+            "false" : "#/components/schemas/FalseCancelResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
+            "description" : "success",
+            "type" : "string"
           },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
           }
         }
       },
       "CancelResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            }
           }
-        }
+        } ]
       },
       "FalseCancelResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewRebillResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "success" : {
+              "$ref" : "#/components/schemas/success"
+            },
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
           }
-        }
+        } ]
       },
       "ChargeResponse" : {
         "type" : "object",
