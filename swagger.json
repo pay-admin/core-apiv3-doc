@@ -1378,6 +1378,7 @@
           "$ref" : "#/components/schemas/NewUnsubscribeResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
