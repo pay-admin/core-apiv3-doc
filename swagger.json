@@ -1285,70 +1285,101 @@
           }
         } ]
       },
-      "ChargeResponse" : {
+      "NewChargeResponse" : {
         "type" : "object",
+        "required" : [ "TransactionId", "success" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/ChargeResponse",
+            "false" : "#/components/schemas/FalseChargeResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
+            "description" : "success",
+            "type" : "string"
           },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
-          },
-          "newAmount" : {
-            "$ref" : "#/components/schemas/newAmount"
-          },
-          "RebillId" : {
-            "$ref" : "#/components/schemas/rebillId"
           }
         }
       },
+      "ChargeResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewChargeResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            },
+            "newAmount" : {
+              "$ref" : "#/components/schemas/newAmount"
+            },
+            "RebillId" : {
+              "$ref" : "#/components/schemas/rebillId"
+            }
+          }
+        } ]
+      },
       "FalseChargeResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewChargeResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        } ]
+      },
+      "NewUnsubscribeResponse" : {
         "type" : "object",
+        "required" : [ "success" ],
+        "discriminator" : {
+          "propertyName" : "success",
+          "mapping" : {
+            "true" : "#/components/schemas/UnsubscribeResponse",
+            "false" : "#/components/schemas/FalseUnsubscribeResponse"
+          }
+        },
         "properties" : {
           "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+            "description" : "success",
+            "type" : "string"
           }
         }
       },
       "UnsubscribeResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          }
-        }
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewChargeResponse"
+        } ]
       },
       "FalseUnsubscribeResponse" : {
-        "type" : "object",
-        "properties" : {
-          "success" : {
-            "$ref" : "#/components/schemas/success"
-          },
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewChargeResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
           }
-        }
+        } ]
       },
       "NewPayoutResponse" : {
         "type" : "object",
