@@ -1190,9 +1190,6 @@
         }, {
           "type" : "object",
           "properties" : {
-            "success" : {
-              "$ref" : "#/components/schemas/success"
-            },
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
             },
@@ -1226,9 +1223,6 @@
         }, {
           "type" : "object",
           "properties" : {
-            "success" : {
-              "$ref" : "#/components/schemas/success"
-            },
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
@@ -1261,9 +1255,6 @@
         }, {
           "type" : "object",
           "properties" : {
-            "success" : {
-              "$ref" : "#/components/schemas/success"
-            },
             "Amount" : {
               "$ref" : "#/components/schemas/Amount"
             },
@@ -1288,9 +1279,6 @@
         }, {
           "type" : "object",
           "properties" : {
-            "success" : {
-              "$ref" : "#/components/schemas/success"
-            },
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
