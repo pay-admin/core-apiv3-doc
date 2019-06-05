@@ -2,8 +2,8 @@
   "openapi" : "3.0.0",
   "info" : {
     "version" : "v3-oas3",
-    "title" : "Payment Center_1",
-    "description" : "This is a sample server Payment Center\n\n# signature\n  Все виды сообщений содержат в HTTP заголовоке параметр signature, в котором находится проверочное значение запроса, вычисленное с помощью алгоритма HMAC. При реализации проверки сообщения, обратите внимание на следующие моменты: \n  уведомления отправляются POST запросом\n  \n  cообщением является тело запроса body, например:\n  \n      \"serviceId=1&tranId=88800&amount=50.00&currency=RUB\" \n  \n  в качестве ключа используется значение параметра secret_key, например:\n  \n     \"secret_key_1\" \n  \n  хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"78e79b0052da99b32146527cc7c5ab13222a4e8a3ded3bd77254f271087cb2a3\" \n  \n  вычисленное значение переводим в кодировку base64:\n  \n      \"NzhlNzliMDA1MmRhOTliMzIxNDY1MjdjYzdjNWFiMTMyMjJhNGU4YTNkZWQzYmQ3NzI1NGYyNzEwODdjYjJhMw==\" \n  \n  Сайты для online проверки генерации подписи:\n  \n      https://www.liavaag.org/English/SHA-Generator/HMAC/\n      \n      https://www.base64encode.org\n  \n  Пример формирования signature (Python):\n  \n      import hashlib\n      import hmac\n      import base64\n      \n      def calc_signature(body, secret_key)\n          message = body\n          secret = bytes(secret_key).encode('utf-8')\n          digest = hmac.new(secret, message, digestmod=hashlib.sha256).hexdigest()\n          return base64.b64encode(digest)\n      \n      \n  Пример формирования signature (PHP):\n  \n  \n      $requestType = \"charge\"; // possible values: charge, refund, pay...\n      $requestUrl = \"https://secured.payment.center/v2/\" . $requestType;\n  \n      // array for parametres\n      $bodyRequestArray = array(\n          'serviceId' => \"YOUR_SERVICE_ID\",\n          'cardNumber' => \"CREDIT_CARD_NUMBER\", // Without spaces, for example, '4111008030004444'\n          'expMonth' => \"EXPIRED_MONTH\", // 2 digits, for example, '04'\n          'expYear' => \"EXPIRED_YEAR\", // 2 digits, for example, '20'\n          'cardHolder' => \"CARD_HOLDER_NAME\",                        \n          'cvc' => \"CVC\",\n          'orderId'   => \"YOUR_ORDER_ID\" \n          'amount'    => \"AMOUNT\", // digits and dot ('.'), for example, '3500.45'\n          'currency'  => strtoupper(\"CURRENCY\"), // RUB|USD\n          'description' => \"DESCRIPTION\",\n      );\n  \n      $body = http_build_query($bodyRequestArray);\n      $signature = getSignature($body, \"YOUR_SECRET_KEY\");\n  \n      $ch = curl_init();\n      curl_setopt($ch, CURLOPT_URL, $requestUrl);\n      curl_setopt($ch, CURLOPT_POST, 1);\n      curl_setopt($ch, CURLOPT_POSTFIELDS, $body);  //Post Fields\n      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n  \n      $headers = array(\n          'signature:'.$signature\n      );\n  \n      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\n  \n      $server_output = curl_exec ($ch);\n  \n      curl_close ($ch);\n  \n      function getSignature($body, $secretKey)\n      {\n          // create signature\n          $hash = hash_hmac('sha256', $body, $secretKey, false);\n          return base64_encode($hash);\n      }\n"
+    "title" : "Payment Center",
+    "description" : "This is a sample server Payment Center\n\n# Mac\n  MAC - цифровая подпись. Сообщения WebPay, WebBlock и Token могут содержать параметр mac (опциональный). По желанию клиента возможность проверки цифровой подписи задается в настройках сервиса (по умолчанию выключена). \n  Подпись вычисляется по тем же правилам, что и signature (см. раздел Signature) за тем исключением, что исходная строка формируется из определенных полей, значение каждого поля дополняется спереди длиной значения в байтах и все поля объединяются (конкатенация) в порядке, определенном в соответствующем описании формата ('serviceid', 'orderid', 'amount' и 'currency'). Если у какого-либо поля значение отсутствует, то используется символ ‘-‘.\n  \n  Пример: \n  Входящие параметры:\n      'SERVICE_ID' => '41',\n      'ORDER_ID' => '22345670062',\n      'AMOUNT' => '15.35',\n      'CURRENCY' => 'RUB'.\n  \n  Строка для хэширования:\n      \"2411122345670062515.353RUB\" \n  в качестве ключа используется значение параметра secret_key, например: \n      \"Vy34ZDpHyRcrZV4T\" \n  хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n      \"432aab1d4314f4a9766539c2d22796c7edfe28d95e791f18fdbaa6d4f6952012\" \n  вычисленное значение переводим в кодировку base64: \n      \"NDMyYWFiMWQ0MzE0ZjRhOTc2NjUzOWMyZDIyNzk2YzdlZGZlMjhkOTVlNzkxZjE4ZmRiYWE2ZDRmNjk1MjAxMg==\" \n  \n  Пример формирования mac (PHP):\n      // список входящих параметров\n      $checking_params = array(\n          'serviceid' => \"YOUR_SERVICE_ID\",  // for example, 41\n          'orderid' => \"YOUR_ORDER_ID\",  // for exacmple, 22345670062\n          'amount' => \"AMOUNT\", // digits and dot ('.'), for example, '15.35',\n          'currency' => strtoupper(\"CURRENCY\"), // RUB|USD,\n      );\n      $string = \"\";\n      foreach ($checking_params as $key => $value) {\n          if ($value == \"\") {\n              $string = $string . \"-\";\n          } else {\n              $string = $string . strlen($value) . $value;\n          }\n      }\n      $mac = hash_hmac('sha256', $string, $service->secretKey, false);\n      $mac = base64_encode($mac);\n\n\n# signature\n  Все виды сообщений содержат в HTTP заголовоке параметр signature, в котором находится проверочное значение запроса, вычисленное с помощью алгоритма HMAC. При реализации проверки сообщения, обратите внимание на следующие моменты: \n  уведомления отправляются POST запросом\n  \n  cообщением является тело запроса body, например:\n  \n      \"serviceId=1&tranId=88800&amount=50.00&currency=RUB\" \n  \n  в качестве ключа используется значение параметра secret_key, например:\n  \n     \"secret_key_1\" \n  \n  хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"78e79b0052da99b32146527cc7c5ab13222a4e8a3ded3bd77254f271087cb2a3\" \n  \n  вычисленное значение переводим в кодировку base64:\n  \n      \"NzhlNzliMDA1MmRhOTliMzIxNDY1MjdjYzdjNWFiMTMyMjJhNGU4YTNkZWQzYmQ3NzI1NGYyNzEwODdjYjJhMw==\" \n  \n  Сайты для online проверки генерации подписи:\n  \n      https://www.liavaag.org/English/SHA-Generator/HMAC/\n      \n      https://www.base64encode.org\n  \n  Пример формирования signature (Python):\n  \n      import hashlib\n      import hmac\n      import base64\n      \n      def calc_signature(body, secret_key)\n          message = body\n          secret = bytes(secret_key).encode('utf-8')\n          digest = hmac.new(secret, message, digestmod=hashlib.sha256).hexdigest()\n          return base64.b64encode(digest)\n      \n      \n  Пример формирования signature (PHP):\n  \n  \n      $requestType = \"charge\"; // possible values: charge, refund, pay...\n      $requestUrl = \"https://secured.payment.center/v2/\" . $requestType;\n  \n      // array for parametres\n      $bodyRequestArray = array(\n          'serviceId' => \"YOUR_SERVICE_ID\",\n          'cardNumber' => \"CREDIT_CARD_NUMBER\", // Without spaces, for example, '4111008030004444'\n          'expMonth' => \"EXPIRED_MONTH\", // 2 digits, for example, '04'\n          'expYear' => \"EXPIRED_YEAR\", // 2 digits, for example, '20'\n          'cardHolder' => \"CARD_HOLDER_NAME\",                        \n          'cvc' => \"CVC\",\n          'orderId'   => \"YOUR_ORDER_ID\" \n          'amount'    => \"AMOUNT\", // digits and dot ('.'), for example, '3500.45'\n          'currency'  => strtoupper(\"CURRENCY\"), // RUB|USD\n          'description' => \"DESCRIPTION\",\n      );\n  \n      $body = http_build_query($bodyRequestArray);\n      $signature = getSignature($body, \"YOUR_SECRET_KEY\");\n  \n      $ch = curl_init();\n      curl_setopt($ch, CURLOPT_URL, $requestUrl);\n      curl_setopt($ch, CURLOPT_POST, 1);\n      curl_setopt($ch, CURLOPT_POSTFIELDS, $body);  //Post Fields\n      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n  \n      $headers = array(\n          'signature:'.$signature\n      );\n  \n      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\n  \n      $server_output = curl_exec ($ch);\n  \n      curl_close ($ch);\n  \n      function getSignature($body, $secretKey)\n      {\n          // create signature\n          $hash = hash_hmac('sha256', $body, $secretKey, false);\n          return base64_encode($hash);\n      }\n"
   },
   "paths" : {
     "/orders/{OrderId}" : {
@@ -68,6 +68,35 @@
           },
           "404" : {
             "description" : "Transaction not found"
+          }
+        }
+      }
+    },
+    "/WebPay" : {
+      "post" : {
+        "description" : "Одностадийная операция оплаты – денежные средства с карты списываются сразу после ее проведения. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа.",
+        "operationId" : "WebPay",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/X-SITE-ID"
+        }, {
+          "$ref" : "#/components/parameters/signature"
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NewWebPayRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          },
+          "400" : {
+            "description" : "Request is not valid"
           }
         }
       }
@@ -385,7 +414,6 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "schema" : null,
                   "$ref" : "#/components/schemas/NewUnsubscribeResponse"
                 }
               }
@@ -549,10 +577,16 @@
         "description" : "Дополнительные поля транзакции. Url encoded строка, содержащая пары ключей и их значений команды, разделённых символом «;» (точка с запятой). Ключи и значения разделены символом ‘=’ (равно). Пример значения до преобразования URL encode: IP=207.46.197.32;Address=Moscow Central str. flat 1 после преобразования URL encode: IP=207.46.197.32;Address=Moscow%20Central%20str.%20flat%201;"
       },
       "ExtraData" : {
-        "type" : "string",
-        "maxLength" : 8096,
-        "minLength" : 1,
+        "type" : "object",
         "description" : "Дополнительные поля транзакции."
+      },
+      "Extra" : {
+        "type" : "object",
+        "description" : "Дополнительные параметры. JSON массив. Может содержать параметры (первые 3 обязательны): \nsuccess_url - url для возврата с страницы success\ndecline_url - url для возврата с страницы error\ncancel_url – url для возврата (кнопка 'Вернуться').\naccount_id – для возврата напрямую в ЛК клиента\nПример: {\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\nВ случае режима с автоматическим редиректом покупателя: \nsuccess_url - url для редиректа при успешной операции\ndecline_url - url для редиректа при неуспешной операции\n"
+      },
+      "Mac" : {
+        "type" : "string",
+        "description" : "Цифровая подпись. [Описание](#section/Mac)"
       },
       "rebillId" : {
         "type" : "integer",
@@ -800,6 +834,39 @@
       "Transaction" : {
         "type" : "object"
       },
+      "NewWebPayRequest" : {
+        "type" : "object",
+        "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "description" ],
+        "properties" : {
+          "OrderId" : {
+            "$ref" : "#/components/schemas/OrderId"
+          },
+          "Amount" : {
+            "$ref" : "#/components/schemas/Amount"
+          },
+          "Currency" : {
+            "$ref" : "#/components/schemas/Currency"
+          },
+          "description" : {
+            "$ref" : "#/components/schemas/description"
+          },
+          "RebillFlag" : {
+            "$ref" : "#/components/schemas/RebillFlag"
+          },
+          "CustomerInfo" : {
+            "$ref" : "#/components/schemas/CustomerInfo"
+          },
+          "ExtraData" : {
+            "$ref" : "#/components/schemas/ExtraData"
+          },
+          "Extra" : {
+            "$ref" : "#/components/schemas/Extra"
+          },
+          "Mac" : {
+            "$ref" : "#/components/schemas/Mac"
+          }
+        }
+      },
       "NewPaymentRequest" : {
         "type" : "object",
         "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "description" ],
@@ -830,7 +897,7 @@
             "$ref" : "#/components/schemas/CustomerInfo"
           },
           "ExtraData" : {
-            "$ref" : "#/components/schemas/CustomFields"
+            "$ref" : "#/components/schemas/ExtraData"
           },
           "PaymentMethod" : {
             "description" : "Payment Method",
@@ -1411,6 +1478,7 @@
           "$ref" : "#/components/schemas/NewPayoutResponse"
         }, {
           "type" : "object",
+          "required" : [ "TransactionId", "Amount", "Currency", "TransactionStatus" ],
           "properties" : {
             "TransactionId" : {
               "$ref" : "#/components/schemas/TransactionId"
@@ -1432,6 +1500,7 @@
           "$ref" : "#/components/schemas/NewPayoutResponse"
         }, {
           "type" : "object",
+          "required" : [ "ErrorResponse" ],
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
@@ -1441,6 +1510,7 @@
       },
       "BalanceResponse" : {
         "type" : "object",
+        "required" : [ "Success" ],
         "discriminator" : {
           "propertyName" : "Success",
           "mapping" : {
@@ -1758,6 +1828,7 @@
         } ]
       },
       "NewBalanceResponse" : {
+        "required" : [ "Balance", "Currency" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/BalanceResponse"
         }, {
@@ -1773,6 +1844,7 @@
         } ]
       },
       "ErrorBalanceResponse" : {
+        "required" : [ "ErrorResponse" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/BalanceResponse"
         }, {
@@ -1786,6 +1858,7 @@
       },
       "TransactionIdResponse" : {
         "type" : "object",
+        "required" : [ "Success" ],
         "discriminator" : {
           "propertyName" : "Success",
           "mapping" : {
@@ -1801,6 +1874,7 @@
         }
       },
       "NewTransactionIdResponse" : {
+        "required" : [ "TransactionId", "OrderId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus_pay" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
@@ -1826,20 +1900,12 @@
             },
             "TransactionStatus_pay" : {
               "$ref" : "#/components/schemas/TransactionStatus_pay"
-            },
-            "redirectMethod" : {
-              "$ref" : "#/components/schemas/redirectMethod"
-            },
-            "redirectUrl" : {
-              "$ref" : "#/components/schemas/redirectUrl"
-            },
-            "redirectParams" : {
-              "$ref" : "#/components/schemas/redirectParams"
             }
           }
         } ]
       },
       "ErrorTransactionIdResponse" : {
+        "required" : [ "ErrorResponse" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
