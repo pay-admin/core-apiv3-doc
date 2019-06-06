@@ -97,70 +97,6 @@
         }
       }
     },
-    "/WebPay" : {
-      "post" : {
-        "tags" : [ "webform" ],
-        "description" : "Одностадийная операция оплаты – денежные средства с карты списываются сразу после ее проведения. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа.",
-        "operationId" : "WebPay",
-        "parameters" : [ {
-          "$ref" : "#/components/parameters/X-SITE-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
-        } ],
-        "requestBody" : {
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/NewWebPayRequest"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Created"
-          },
-          "400" : {
-            "description" : "Request is not valid"
-          }
-        }
-      }
-    },
-    "/WebBlock" : {
-      "post" : {
-        "tags" : [ "webform" ],
-        "description" : "Двухстадийная операция оплаты – денежные средства блокируются на карте. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа.",
-        "operationId" : "WebBlock",
-        "parameters" : [ {
-          "$ref" : "#/components/parameters/X-SITE-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
-        } ],
-        "requestBody" : {
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/NewWebPayRequest"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Created"
-          },
-          "400" : {
-            "description" : "Request is not valid"
-          }
-        }
-      }
-    },
     "/Token" : {
       "post" : {
         "tags" : [ "webform" ],
@@ -999,9 +935,6 @@
           },
           "Extra" : {
             "$ref" : "#/components/schemas/Extra"
-          },
-          "Mac" : {
-            "$ref" : "#/components/schemas/Mac"
           }
         }
       },
