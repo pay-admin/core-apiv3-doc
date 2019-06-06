@@ -3,7 +3,7 @@
   "info" : {
     "version" : "v3-oas3",
     "x-logo" : {
-      "url" : "../logo.png",
+      "url" : "../static/logo.png",
       "backgroundColor" : null,
       "altText" : "Payment Center logo"
     },
