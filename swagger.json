@@ -97,45 +97,6 @@
         }
       }
     },
-    "/Token" : {
-      "post" : {
-        "tags" : [ "webform" ],
-        "description" : "Формирование параметра token для проведения оплаты через ссылку. ",
-        "operationId" : "Token",
-        "parameters" : [ {
-          "$ref" : "#/components/parameters/X-SITE-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
-        } ],
-        "requestBody" : {
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/NewWebPayRequest"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/NewTokenResponse"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Request is not valid"
-          }
-        }
-      }
-    },
     "/payments" : {
       "post" : {
         "tags" : [ "gateway" ],
