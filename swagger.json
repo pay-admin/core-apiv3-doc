@@ -42,7 +42,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "responses" : {
           "200" : {
@@ -78,7 +78,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "responses" : {
           "200" : {
@@ -107,7 +107,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -139,7 +139,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -171,7 +171,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -210,7 +210,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -256,7 +256,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -295,7 +295,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -334,7 +334,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -373,7 +373,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -405,7 +405,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -444,7 +444,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -483,7 +483,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -522,7 +522,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -561,7 +561,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -600,7 +600,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "responses" : {
           "201" : {
@@ -626,7 +626,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/signature"
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -657,9 +657,9 @@
           "type" : "string"
         }
       },
-      "signature" : {
+      "X-REQUEST-SIGNATURE" : {
         "in" : "header",
-        "name" : "signature",
+        "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
         "description" : "Подпись заголовка. [Описание](#section/signature)",
         "schema" : {
