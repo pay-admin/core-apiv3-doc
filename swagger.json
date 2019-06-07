@@ -553,7 +553,7 @@
         "in" : "header",
         "name" : "X-REQUEST-ID",
         "required" : true,
-        "description" : "Уникальный ID транзакции в X-SITE-ID.",
+        "description" : "Уникальный ID транзакции у Мерчанта.",
         "schema" : {
           "type" : "string"
         }
