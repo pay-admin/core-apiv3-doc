@@ -857,7 +857,7 @@
       },
       "NewWebPayRequest" : {
         "type" : "object",
-        "required" : [ "OrderId", "Amount", "Currency", "Extra", "description" ],
+        "required" : [ "OrderId", "Amount", "Currency", "Extra", "Description" ],
         "properties" : {
           "OrderId" : {
             "$ref" : "#/components/schemas/OrderId"
@@ -887,7 +887,7 @@
       },
       "NewPaymentRequest" : {
         "type" : "object",
-        "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "description" ],
+        "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "Description" ],
         "discriminator" : {
           "propertyName" : "PaymentMethod",
           "mapping" : {
@@ -1021,7 +1021,7 @@
       },
       "NewPayoutRequest" : {
         "type" : "object",
-        "required" : [ "CardNumber", "CardholderName", "OrderId", "Amount", "Currency", "description" ],
+        "required" : [ "CardNumber", "CardholderName", "OrderId", "Amount", "Currency", "Description" ],
         "properties" : {
           "CardNumber" : {
             "$ref" : "#/components/schemas/CardNumber"
