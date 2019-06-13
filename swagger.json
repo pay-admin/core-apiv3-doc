@@ -83,52 +83,6 @@
         }
       }
     },
-    "/payments" : {
-      "post" : {
-        "tags" : [ "gateway" ],
-        "description" : "/payments",
-        "operationId" : "/payments",
-        "parameters" : [ {
-          "$ref" : "#/components/parameters/X-SITE-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
-        } ],
-        "requestBody" : {
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/NewPayformRequest"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "201" : {
-            "description" : "Created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/NewPayformSuccessResponse"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Request is not valid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/payments/requests/single" : {
       "post" : {
         "tags" : [ "gateway" ],
