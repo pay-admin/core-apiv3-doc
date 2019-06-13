@@ -1037,9 +1037,11 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
+            "pending" : "#/components/schemas/PaymentResponse",
             "success" : "#/components/schemas/PaymentResponse",
             "preauthorized" : "#/components/schemas/PaymentResponse",
             "declined" : "#/components/schemas/FalsePaymentResponse",
+            "decline" : "#/components/schemas/FalsePaymentResponse",
             "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
             "redirect" : "#/components/schemas/RedirectPaymentResponse"
           }
