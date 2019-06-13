@@ -706,7 +706,6 @@
       },
       "TransactionState" : {
         "type" : "string",
-        "enum" : [ "success", "declined", "pending", "wait_for_3ds", "preauthorized" ],
         "description" : "Флаг успешности операции."
       },
       "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
