@@ -688,10 +688,6 @@
         "type" : "string",
         "description" : "Зашифрованный запрос."
       },
-      "threeDSKey" : {
-        "type" : "string",
-        "description" : "Специальный атрибут."
-      },
       "redirectUrl" : {
         "type" : "string",
         "description" : "URL для редиректа."
@@ -1142,19 +1138,16 @@
           "$ref" : "#/components/schemas/NewPaymentResponse"
         }, {
           "type" : "object",
-          "required" : [ "acsUrl", "PaRes", "threeDSKey", "redirectUrl", "redirectParams", "redirectMethod" ],
+          "required" : [ "acsUrl", "PaRes", "MD", "redirectUrl", "redirectParams", "redirectMethod" ],
           "properties" : {
-            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
-              "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
-            },
             "acsUrl" : {
               "$ref" : "#/components/schemas/acsUrl"
             },
             "PaRes" : {
               "$ref" : "#/components/schemas/PaRes"
             },
-            "threeDSKey" : {
-              "$ref" : "#/components/schemas/threeDSKey"
+            "MD" : {
+              "$ref" : "#/components/schemas/MD"
             }
           }
         } ]
