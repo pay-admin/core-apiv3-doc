@@ -1879,9 +1879,9 @@
           "mapping" : {
             "success" : "#/components/schemas/NewTransactionIdResponse",
             "preauthorized" : "#/components/schemas/NewTransactionIdResponse",
-            "pending" : "#/components/schemas/PendingTransactionIdResponse",
+            "pending" : "#/components/schemas/NewTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
-            "wait_for_3ds" : "#/components/schemas/3DSTransactionIdResponse"
+            "wait_for_3ds" : "#/components/schemas/NewTransactionIdResponse"
           }
         },
         "properties" : {
