@@ -1873,7 +1873,7 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "success" : "#/components/schemas/New1TransactionIdResponse",
+            "success, success2" : "#/components/schemas/New1TransactionIdResponse",
             "preauthorized" : "#/components/schemas/New2TransactionIdResponse",
             "pending" : "#/components/schemas/NewTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
