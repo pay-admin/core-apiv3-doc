@@ -582,10 +582,6 @@
         "minLength" : 1,
         "description" : "Идентификатор транзакции в системе."
       },
-      "MD" : {
-        "type" : "integer",
-        "description" : "MD"
-      },
       "QiwiNumber" : {
         "type" : "integer",
         "maxLength" : 19,
@@ -687,6 +683,10 @@
       "PaReq" : {
         "type" : "string",
         "description" : "Зашифрованный запрос."
+      },
+      "MD" : {
+        "type" : "string",
+        "description" : "Специальный идентификатор."
       },
       "redirectUrl" : {
         "type" : "string",
@@ -1873,8 +1873,8 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "successs" : "#/components/schemas/NewTransactionIdResponse",
-            "preauthorized" : "#/components/schemas/NewTransactionIdResponse",
+            "success" : "#/components/schemas/New1TransactionIdResponse",
+            "preauthorized" : "#/components/schemas/New2TransactionIdResponse",
             "pending" : "#/components/schemas/NewTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
             "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
