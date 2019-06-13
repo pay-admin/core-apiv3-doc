@@ -1038,7 +1038,7 @@
           "propertyName" : "TransactionState",
           "mapping" : {
             "pending" : "#/components/schemas/PendingPaymentResponse",
-            "preauthorized" : "#/components/schemas/PaymentResponse",
+            "preauthorized" : "#/components/schemas/PreauthorizedPaymentResponse",
             "declined" : "#/components/schemas/FalsePaymentResponse",
             "success" : "#/components/schemas/SuccessPaymentResponse",
             "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
@@ -1133,6 +1133,9 @@
         "$ref" : "#/components/schemas/PaymentResponse"
       },
       "PendingPaymentResponse" : {
+        "$ref" : "#/components/schemas/PaymentResponse"
+      },
+      "PreauthorizedPaymentResponse" : {
         "$ref" : "#/components/schemas/PaymentResponse"
       },
       "3DSPaymentResponse" : {
