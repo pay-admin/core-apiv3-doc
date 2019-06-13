@@ -1037,10 +1037,10 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "pending" : "#/components/schemas/PaymentResponse",
+            "pending" : "#/components/schemas/PendingPaymentResponse",
             "preauthorized" : "#/components/schemas/PaymentResponse",
             "declined" : "#/components/schemas/FalsePaymentResponse",
-            "success" : "#/components/schemas/PaymentResponse",
+            "success" : "#/components/schemas/SuccessPaymentResponse",
             "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
             "redirect" : "#/components/schemas/RedirectPaymentResponse"
           }
@@ -1128,6 +1128,12 @@
             }
           }
         } ]
+      },
+      "SuccessPaymentResponse" : {
+        "$ref" : "#/components/schemas/PaymentResponse"
+      },
+      "PendingPaymentResponse" : {
+        "$ref" : "#/components/schemas/PaymentResponse"
       },
       "3DSPaymentResponse" : {
         "allOf" : [ {
