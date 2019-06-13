@@ -1113,7 +1113,7 @@
           "type" : "object",
           "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
           "properties" : {
-            "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
+            "TransactionState" : {
               "$ref" : "#/components/schemas/TODO_CHANGE_FIELD_SUCCESS_LOGIC"
             },
             "TransactionId" : {
@@ -1896,7 +1896,7 @@
         }
       },
       "NewTransactionIdResponse" : {
-        "required" : [ "TransactionId", "OrderId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus_pay" ],
+        "required" : [ "TransactionId", "OrderId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
