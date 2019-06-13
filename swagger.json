@@ -708,9 +708,9 @@
         "type" : "string",
         "description" : "HTTP метод, используемый для редиректа."
       },
-      "success" : {
+      "TransactionState" : {
         "type" : "string",
-        "enum" : [ true, false ],
+        "enum" : [ "success", "declined", "pending", "wait_for_3ds", "preauthorized" ],
         "description" : "Флаг успешности операции."
       },
       "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
@@ -1072,7 +1072,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "Состояние транзакции",
             "type" : "string"
           }
@@ -1200,7 +1200,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "Состояние транзакции",
             "type" : "string"
           },
@@ -1261,7 +1261,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "Состояние транзакции",
             "type" : "string"
           },
@@ -1322,7 +1322,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "Состояние транзакции",
             "type" : "string"
           },
@@ -1380,7 +1380,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "TransactionState",
             "type" : "string"
           },
@@ -1444,7 +1444,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "TransactionState",
             "type" : "string"
           }
@@ -1480,7 +1480,7 @@
           }
         },
         "properties" : {
-          "success" : {
+          "TransactionState" : {
             "description" : "success",
             "type" : "string"
           },
@@ -1535,7 +1535,7 @@
           }
         },
         "properties" : {
-          "Success" : {
+          "TransactionState" : {
             "description" : "TransactionState",
             "type" : "string"
           },
