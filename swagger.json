@@ -1195,8 +1195,8 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "true" : "#/components/schemas/RebillResponse",
-            "false" : "#/components/schemas/FalseRebillResponse"
+            "success" : "#/components/schemas/RebillResponse",
+            "declined" : "#/components/schemas/FalseRebillResponse"
           }
         },
         "properties" : {
