@@ -1039,7 +1039,6 @@
           "mapping" : {
             "success" : "#/components/schemas/PaymentResponse",
             "preauthorized" : "#/components/schemas/PaymentResponse",
-            "pending" : "#/components/schemas/PaymentResponse",
             "declined" : "#/components/schemas/FalsePaymentResponse",
             "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
             "redirect" : "#/components/schemas/RedirectPaymentResponse"
