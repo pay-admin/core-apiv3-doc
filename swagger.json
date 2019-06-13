@@ -1873,17 +1873,20 @@
       },
       "TransactionIdResponse" : {
         "type" : "object",
-        "required" : [ "Success" ],
+        "required" : [ "TransactionState" ],
         "discriminator" : {
-          "propertyName" : "Success",
+          "propertyName" : "TransactionState",
           "mapping" : {
-            "true" : "#/components/schemas/NewTransactionIdResponse",
-            "false" : "#/components/schemas/ErrorTransactionIdResponse"
+            "success" : "#/components/schemas/NewTransactionIdResponse",
+            "preauthorized" : "#/components/schemas/NewTransactionIdResponse",
+            "pending" : "#/components/schemas/PendingTransactionIdResponse",
+            "declined" : "#/components/schemas/ErrorTransactionIdResponse",
+            "wait_for_3ds" : "#/components/schemas/3DSTransactionIdResponse"
           }
         },
         "properties" : {
-          "Success" : {
-            "description" : "Success",
+          "TransactionState" : {
+            "description" : "Transaction state",
             "type" : "string"
           }
         }
