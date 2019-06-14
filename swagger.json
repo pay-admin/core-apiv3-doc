@@ -1101,33 +1101,36 @@
           }
         } ]
       },
+      "PaymentResponse" : {
+        "type" : "object",
+        "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
+        "properties" : {
+          "TransactionId" : {
+            "$ref" : "#/components/schemas/TransactionId"
+          },
+          "Amount" : {
+            "$ref" : "#/components/schemas/Amount"
+          },
+          "Currency" : {
+            "$ref" : "#/components/schemas/Currency"
+          },
+          "ProcessingAmount" : {
+            "$ref" : "#/components/schemas/ProcessingAmount"
+          },
+          "ProcessingCurrency" : {
+            "$ref" : "#/components/schemas/ProcessingCurrency"
+          },
+          "TransactionStatus" : {
+            "$ref" : "#/components/schemas/TransactionStatus_pay"
+          }
+        }
+      },
       "SuccessPaymentResponse" : {
         "type" : "object",
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPaymentResponse"
         }, {
-          "type" : "object",
-          "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
-          "properties" : {
-            "TransactionId" : {
-              "$ref" : "#/components/schemas/TransactionId"
-            },
-            "Amount" : {
-              "$ref" : "#/components/schemas/Amount"
-            },
-            "Currency" : {
-              "$ref" : "#/components/schemas/Currency"
-            },
-            "ProcessingAmount" : {
-              "$ref" : "#/components/schemas/ProcessingAmount"
-            },
-            "ProcessingCurrency" : {
-              "$ref" : "#/components/schemas/ProcessingCurrency"
-            },
-            "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
-            }
-          }
+          "$ref" : "#/components/schemas/PaymentResponse"
         } ]
       },
       "PendingPaymentResponse" : {
@@ -1135,28 +1138,7 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPaymentResponse"
         }, {
-          "type" : "object",
-          "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
-          "properties" : {
-            "TransactionId" : {
-              "$ref" : "#/components/schemas/TransactionId"
-            },
-            "Amount" : {
-              "$ref" : "#/components/schemas/Amount"
-            },
-            "Currency" : {
-              "$ref" : "#/components/schemas/Currency"
-            },
-            "ProcessingAmount" : {
-              "$ref" : "#/components/schemas/ProcessingAmount"
-            },
-            "ProcessingCurrency" : {
-              "$ref" : "#/components/schemas/ProcessingCurrency"
-            },
-            "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
-            }
-          }
+          "$ref" : "#/components/schemas/PaymentResponse"
         } ]
       },
       "PreauthorizedPaymentResponse" : {
@@ -1164,28 +1146,7 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPaymentResponse"
         }, {
-          "type" : "object",
-          "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
-          "properties" : {
-            "TransactionId" : {
-              "$ref" : "#/components/schemas/TransactionId"
-            },
-            "Amount" : {
-              "$ref" : "#/components/schemas/Amount"
-            },
-            "Currency" : {
-              "$ref" : "#/components/schemas/Currency"
-            },
-            "ProcessingAmount" : {
-              "$ref" : "#/components/schemas/ProcessingAmount"
-            },
-            "ProcessingCurrency" : {
-              "$ref" : "#/components/schemas/ProcessingCurrency"
-            },
-            "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
-            }
-          }
+          "$ref" : "#/components/schemas/PaymentResponse"
         } ]
       },
       "3DSPaymentResponse" : {
