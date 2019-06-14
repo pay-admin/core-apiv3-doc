@@ -1130,12 +1130,15 @@
         } ]
       },
       "SuccessPaymentResponse" : {
+        "type" : "object",
         "$ref" : "#/components/schemas/PaymentResponse"
       },
       "PendingPaymentResponse" : {
+        "type" : "object",
         "$ref" : "#/components/schemas/PaymentResponse"
       },
       "PreauthorizedPaymentResponse" : {
+        "type" : "object",
         "$ref" : "#/components/schemas/PaymentResponse"
       },
       "3DSPaymentResponse" : {
