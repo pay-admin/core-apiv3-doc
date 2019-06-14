@@ -1131,13 +1131,28 @@
         } ]
       },
       "SuccessPaymentResponse" : {
-        "$ref" : "#/components/schemas/PaymentResponse"
+        "type" : "object",
+        "properties" : {
+          "Success" : {
+            "$ref" : "#/components/schemas/PaymentResponse"
+          }
+        }
       },
       "PendingPaymentResponse" : {
-        "$ref" : "#/components/schemas/PaymentResponse"
+        "type" : "object",
+        "properties" : {
+          "Pending" : {
+            "$ref" : "#/components/schemas/PaymentResponse"
+          }
+        }
       },
       "PreauthorizedPaymentResponse" : {
-        "$ref" : "#/components/schemas/PaymentResponse"
+        "type" : "object",
+        "properties" : {
+          "Preauthorized" : {
+            "$ref" : "#/components/schemas/PaymentResponse"
+          }
+        }
       },
       "3DSPaymentResponse" : {
         "allOf" : [ {
