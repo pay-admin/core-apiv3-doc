@@ -125,6 +125,16 @@
                 }
               }
             }
+          },
+          "409" : {
+            "description" : "Request is not valid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FalsePaymentResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1892,7 +1902,17 @@
         } ]
       },
       "RedirectTransactionIdResponse" : {
-        "$ref" : "#/components/schemas/TransactionIdResponse"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/TransactionIdResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "TransactionId" ],
+          "properties" : {
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            }
+          }
+        } ]
       },
       "OrderIdResponse" : {
         "type" : "array",
