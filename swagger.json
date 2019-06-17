@@ -1037,12 +1037,8 @@
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "pending" : "#/components/schemas/PendingPaymentResponse",
-            "preauthorized" : "#/components/schemas/PreauthorizedPaymentResponse",
             "declined" : "#/components/schemas/FalsePaymentResponse",
-            "success" : "#/components/schemas/SuccessPaymentResponse",
-            "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
-            "redirect" : "#/components/schemas/RedirectPaymentResponse"
+            "success" : "#/components/schemas/SuccessPaymentResponse"
           }
         },
         "properties" : {
@@ -1110,18 +1106,6 @@
           },
           "Currency" : {
             "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus_pay"
-          },
-          "rebillId" : {
-            "$ref" : "#/components/schemas/rebillId"
           }
         }
       },
@@ -1131,54 +1115,6 @@
           "$ref" : "#/components/schemas/NewPaymentResponse"
         }, {
           "$ref" : "#/components/schemas/PaymentResponse"
-        } ]
-      },
-      "PendingPaymentResponse" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/NewPaymentResponse"
-        }, {
-          "$ref" : "#/components/schemas/PaymentResponse"
-        } ]
-      },
-      "PreauthorizedPaymentResponse" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/NewPaymentResponse"
-        }, {
-          "$ref" : "#/components/schemas/PaymentResponse"
-        } ]
-      },
-      "3DSPaymentResponse" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/NewPaymentResponse"
-        }, {
-          "type" : "object",
-          "required" : [ "acsUrl", "PaRes", "MD", "redirectUrl", "redirectParams", "redirectMethod" ],
-          "properties" : {
-            "acsUrl" : {
-              "$ref" : "#/components/schemas/acsUrl"
-            },
-            "PaRes" : {
-              "$ref" : "#/components/schemas/PaRes"
-            },
-            "MD" : {
-              "$ref" : "#/components/schemas/MD"
-            }
-          }
-        } ]
-      },
-      "RedirectPaymentResponse" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/NewPaymentResponse"
-        }, {
-          "type" : "object",
-          "required" : [ "TransactionId" ],
-          "properties" : {
-            "TransactionId" : {
-              "$ref" : "#/components/schemas/TransactionId"
-            }
-          }
         } ]
       },
       "FalsePaymentResponse" : {
