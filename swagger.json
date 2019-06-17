@@ -567,9 +567,9 @@
         "minLength" : 1,
         "description" : "Идентификатор рекуррентного платежа."
       },
-      "PaymentTypeFlag" : {
+      "PayOnlyFlag" : {
         "type" : "boolean",
-        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию 0): true - использовать тип платежа (BLOCK/PAY) родительской транзакции, false - не использовать (всегда PAY).",
+        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию true): true - использовать тип платежа (PAY) родительской транзакции, false - использовать тип платежа (BLOCK/CHARGE).",
         "enum" : [ true, false ]
       },
       "TransactionId" : {
@@ -887,8 +887,8 @@
           "RebillId" : {
             "$ref" : "#/components/schemas/rebillId"
           },
-          "PaymentType" : {
-            "$ref" : "#/components/schemas/PaymentTypeFlag"
+          "PayOnlyFlag" : {
+            "$ref" : "#/components/schemas/PayOnlyFlag"
           }
         }
       },
