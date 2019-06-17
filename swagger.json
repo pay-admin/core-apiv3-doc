@@ -127,11 +127,11 @@
             }
           },
           "409" : {
-            "description" : "Request is not valid",
+            "description" : "Conflict",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FalsePaymentResponse"
+                  "$ref" : "#/components/schemas/DoublePaymentResponse"
                 }
               }
             }
@@ -1107,13 +1107,31 @@
       },
       "FalsePaymentResponse" : {
         "type" : "object",
-        "required" : [ "OrderId", "ErrorResponse" ],
+        "required" : [ "ErrorResponse" ],
         "properties" : {
-          "OrderId" : {
-            "$ref" : "#/components/schemas/OrderId"
-          },
           "ErrorResponse" : {
             "$ref" : "#/components/schemas/ErrorResponse"
+          }
+        }
+      },
+      "DoublePaymentResponse" : {
+        "type" : "object",
+        "required" : [ "ErrorResponse" ],
+        "properties" : {
+          "ErrorResponse" : {
+            "$ref" : "#/components/schemas/ErrorResponse"
+          },
+          "XXX" : {
+            "type" : "object",
+            "required" : [ "TransactionId", "OrderId" ],
+            "properties" : {
+              "OrderId" : {
+                "$ref" : "#/components/schemas/OrderId"
+              },
+              "TransactionId" : {
+                "$ref" : "#/components/schemas/TransactionId"
+              }
+            }
           }
         }
       },
