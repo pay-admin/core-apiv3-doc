@@ -1800,8 +1800,8 @@
             "preauthorized" : "#/components/schemas/PreauthorizedTransactionIdResponse",
             "pending" : "#/components/schemas/PendingTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
-            "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
-            "redirect" : "#/components/schemas/RedirectPaymentResponse"
+            "wait_for_3ds" : "#/components/schemas/3DSTransactionIdResponse",
+            "redirect" : "#/components/schemas/RedirectTransactionIdResponse"
           }
         },
         "properties" : {
