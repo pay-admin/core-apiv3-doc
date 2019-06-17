@@ -117,24 +117,7 @@
             }
           },
           "400" : {
-            "description" : "Request is not valid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FalsePaymentResponse"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Conflict",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/DoublePaymentResponse"
-                }
-              }
-            }
+            "description" : "Request is not valid"
           }
         }
       }
@@ -515,7 +498,7 @@
         "in" : "header",
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
-        "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
+        "description" : "Подпись запроса. [Описание](#section/signature)",
         "schema" : {
           "type" : "string"
         }
@@ -562,11 +545,9 @@
         "description" : "Валюта в формате ISO (USD, EUR, RUR). Буквы (a-zA-Z)."
       },
       "RebillFlag" : {
-        "type" : "integer",
-        "minimum" : 0,
-        "maximum" : 1,
+        "type" : "boolean",
         "description" : "Признак рекуррентного платежа.",
-        "enum" : [ 0, 1 ]
+        "enum" : [ true, false ]
       },
       "ExtraData" : {
         "type" : "object",
@@ -576,6 +557,10 @@
         "type" : "object",
         "description" : "Дополнительные параметры. JSON массив. Может содержать параметры (первые 3 обязательны):\n\n<b>success_url</b> - url для возврата с страницы success;\n<b>decline_url</b> - url для возврата с страницы error;\n<b>cancel_url</b> – url для возврата (кнопка 'Вернуться');\n<b>account_id</b> – для возврата напрямую в ЛК клиента;\n\nПример: \n{\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\n\nВ случае режима с автоматическим редиректом покупателя: \n\n<b>success_url</b> - url для редиректа при успешной операции;\n<b>decline_url</b> - url для редиректа при неуспешной операции;\n"
       },
+      "Mac" : {
+        "type" : "string",
+        "description" : "Цифровая подпись. [Описание](#section/Mac)"
+      },
       "rebillId" : {
         "type" : "integer",
         "maxLength" : 20,
@@ -583,11 +568,9 @@
         "description" : "Идентификатор рекуррентного платежа."
       },
       "PaymentType" : {
-        "type" : "integer",
-        "minimum" : 0,
-        "maximum" : 1,
-        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию 0): 1 - использовать тип платежа (BLOCK/PAY) родительской транзакции, 0 - не использовать (всегда PAY).",
-        "enum" : [ 0, 1 ]
+        "type" : "boolean",
+        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию 0): true - использовать тип платежа (BLOCK/PAY) родительской транзакции, false - не использовать (всегда PAY).",
+        "enum" : [ true, false ]
       },
       "TransactionId" : {
         "type" : "integer",
@@ -726,9 +709,14 @@
         "description" : "Флаг операции.",
         "enum" : [ true, false, "3DS", "REDIRECT" ]
       },
-      "TransactionStatus" : {
+      "TransactionStatus_pay" : {
         "type" : "string",
-        "enum" : [ "new", "charged", "refunded", "failedrefund", "failed", "rejectedrefund", "rejected", "pending", "frozen", "cancel", "declined", "result_unknown", "filtered" ],
+        "enum" : [ "new", "trusted", "filtered", "preAuthorized3DS", "preAuthorizedAF", "authorized", "voided", "charged", "refunded", "rejected", "error" ],
+        "description" : "Текущее состояние транзакции."
+      },
+      "TransactionStatus_payout" : {
+        "type" : "string",
+        "enum" : [ "new", "trusted", "filtered", "charged", "rejected", "error" ],
         "description" : "Текущее состояние транзакции."
       },
       "newAmount" : {
@@ -1041,19 +1029,25 @@
       },
       "NewPaymentResponse" : {
         "type" : "object",
-        "required" : [ "OrderId", "TransactionId", "Amount", "Currency" ],
+        "required" : [ "OrderId", "TransactionState" ],
+        "discriminator" : {
+          "propertyName" : "TransactionState",
+          "mapping" : {
+            "pending" : "#/components/schemas/PendingPaymentResponse",
+            "preauthorized" : "#/components/schemas/PreauthorizedPaymentResponse",
+            "declined" : "#/components/schemas/FalsePaymentResponse",
+            "success" : "#/components/schemas/SuccessPaymentResponse",
+            "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
+            "redirect" : "#/components/schemas/RedirectPaymentResponse"
+          }
+        },
         "properties" : {
+          "TransactionState" : {
+            "description" : "Transaction State",
+            "type" : "string"
+          },
           "OrderId" : {
             "$ref" : "#/components/schemas/OrderId"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
           }
         }
       },
@@ -1100,35 +1094,101 @@
           }
         } ]
       },
-      "FalsePaymentResponse" : {
+      "PaymentResponse" : {
         "type" : "object",
-        "required" : [ "ErrorResponse" ],
+        "required" : [ "TransactionId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency", "TransactionStatus" ],
         "properties" : {
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+          "TransactionId" : {
+            "$ref" : "#/components/schemas/TransactionId"
+          },
+          "Amount" : {
+            "$ref" : "#/components/schemas/Amount"
+          },
+          "Currency" : {
+            "$ref" : "#/components/schemas/Currency"
+          },
+          "ProcessingAmount" : {
+            "$ref" : "#/components/schemas/ProcessingAmount"
+          },
+          "ProcessingCurrency" : {
+            "$ref" : "#/components/schemas/ProcessingCurrency"
+          },
+          "TransactionStatus" : {
+            "$ref" : "#/components/schemas/TransactionStatus_pay"
+          },
+          "rebillId" : {
+            "$ref" : "#/components/schemas/rebillId"
           }
         }
       },
-      "DoublePaymentResponse" : {
+      "SuccessPaymentResponse" : {
         "type" : "object",
-        "required" : [ "ErrorResponse" ],
-        "properties" : {
-          "ErrorResponse" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
-          },
-          "XXX" : {
-            "type" : "object",
-            "required" : [ "TransactionId", "OrderId" ],
-            "properties" : {
-              "OrderId" : {
-                "$ref" : "#/components/schemas/OrderId"
-              },
-              "TransactionId" : {
-                "$ref" : "#/components/schemas/TransactionId"
-              }
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "$ref" : "#/components/schemas/PaymentResponse"
+        } ]
+      },
+      "PendingPaymentResponse" : {
+        "type" : "object",
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "$ref" : "#/components/schemas/PaymentResponse"
+        } ]
+      },
+      "PreauthorizedPaymentResponse" : {
+        "type" : "object",
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "$ref" : "#/components/schemas/PaymentResponse"
+        } ]
+      },
+      "3DSPaymentResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "acsUrl", "PaRes", "MD", "redirectUrl", "redirectParams", "redirectMethod" ],
+          "properties" : {
+            "acsUrl" : {
+              "$ref" : "#/components/schemas/acsUrl"
+            },
+            "PaRes" : {
+              "$ref" : "#/components/schemas/PaRes"
+            },
+            "MD" : {
+              "$ref" : "#/components/schemas/MD"
             }
           }
-        }
+        } ]
+      },
+      "RedirectPaymentResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "TransactionId" ],
+          "properties" : {
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            }
+          }
+        } ]
+      },
+      "FalsePaymentResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPaymentResponse"
+        }, {
+          "type" : "object",
+          "required" : [ "ErrorResponse" ],
+          "properties" : {
+            "ErrorResponse" : {
+              "$ref" : "#/components/schemas/ErrorResponse"
+            }
+          }
+        } ]
       },
       "NewRebillResponse" : {
         "type" : "object",
@@ -1170,7 +1230,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus"
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
             },
             "RebillId" : {
               "$ref" : "#/components/schemas/rebillId"
@@ -1231,7 +1291,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus"
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
             },
             "newAmount" : {
               "$ref" : "#/components/schemas/newAmount"
@@ -1292,7 +1352,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus"
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
             }
           }
         } ]
@@ -1350,7 +1410,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus"
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
             },
             "newAmount" : {
               "$ref" : "#/components/schemas/newAmount"
@@ -1447,7 +1507,7 @@
               "$ref" : "#/components/schemas/Currency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus"
+              "$ref" : "#/components/schemas/TransactionStatus_payout"
             }
           }
         } ]
@@ -1491,26 +1551,6 @@
       "PaymentMethod" : {
         "type" : "object"
       },
-      "Details" : {
-        "type" : "object",
-        "properties" : {
-          "CardNumber" : {
-            "$ref" : "#/components/schemas/CardNumber"
-          },
-          "ExpMonth" : {
-            "$ref" : "#/components/schemas/ExpMonth"
-          },
-          "ExpYear" : {
-            "$ref" : "#/components/schemas/ExpYear"
-          },
-          "CardholderName" : {
-            "$ref" : "#/components/schemas/CardHolder"
-          },
-          "CVC" : {
-            "$ref" : "#/components/schemas/CVC"
-          }
-        }
-      },
       "CardDetails" : {
         "required" : [ "CardNumber", "ExpMonth", "ExpYear", "CVC", "CardholderName" ],
         "allOf" : [ {
@@ -1518,8 +1558,20 @@
         }, {
           "type" : "object",
           "properties" : {
-            "Details" : {
-              "$ref" : "#/components/schemas/Details"
+            "CardNumber" : {
+              "$ref" : "#/components/schemas/CardNumber"
+            },
+            "ExpMonth" : {
+              "$ref" : "#/components/schemas/ExpMonth"
+            },
+            "ExpYear" : {
+              "$ref" : "#/components/schemas/ExpYear"
+            },
+            "CardholderName" : {
+              "$ref" : "#/components/schemas/CardHolder"
+            },
+            "CVC" : {
+              "$ref" : "#/components/schemas/CVC"
             }
           }
         } ]
@@ -1823,74 +1875,54 @@
       },
       "TransactionIdResponse" : {
         "type" : "object",
-        "required" : [ "TransactionState", "TransactionStatus", "TransactionId", "OrderId" ],
+        "required" : [ "TransactionState" ],
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
-            "success" : "#/components/schemas/SuccessTransactionIdResponse",
-            "preauthorized" : "#/components/schemas/PreauthorizedTransactionIdResponse",
-            "pending" : "#/components/schemas/PendingTransactionIdResponse",
+            "success, success2" : "#/components/schemas/New1TransactionIdResponse",
+            "preauthorized" : "#/components/schemas/New2TransactionIdResponse",
+            "pending" : "#/components/schemas/NewTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
-            "wait_for_3ds" : "#/components/schemas/3DSTransactionIdResponse",
-            "redirect" : "#/components/schemas/RedirectTransactionIdResponse"
+            "wait_for_3ds" : "#/components/schemas/3DSPaymentResponse",
+            "redirect" : "#/components/schemas/RedirectPaymentResponse"
           }
         },
         "properties" : {
           "TransactionState" : {
             "description" : "Состоянии транзакции",
             "type" : "string"
-          },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus"
-          },
-          "TransactionId" : {
-            "$ref" : "#/components/schemas/TransactionId"
-          },
-          "OrderId" : {
-            "$ref" : "#/components/schemas/OrderId"
           }
         }
       },
       "NewTransactionIdResponse" : {
-        "type" : "object",
-        "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
-        "properties" : {
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
+        "required" : [ "TransactionId", "OrderId", "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/TransactionIdResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "TransactionId" : {
+              "$ref" : "#/components/schemas/TransactionId"
+            },
+            "OrderId" : {
+              "$ref" : "#/components/schemas/OrderId"
+            },
+            "Amount" : {
+              "$ref" : "#/components/schemas/Amount"
+            },
+            "Currency" : {
+              "$ref" : "#/components/schemas/Currency"
+            },
+            "ProcessingAmount" : {
+              "$ref" : "#/components/schemas/ProcessingAmount"
+            },
+            "ProcessingCurrency" : {
+              "$ref" : "#/components/schemas/ProcessingCurrency"
+            },
+            "TransactionStatus_pay" : {
+              "$ref" : "#/components/schemas/TransactionStatus_pay"
+            }
           }
-        }
-      },
-      "SuccessTransactionIdResponse" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/TransactionIdResponse"
-        }, {
-          "$ref" : "#/components/schemas/NewTransactionIdResponse"
-        } ]
-      },
-      "PreauthorizedTransactionIdResponse" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/TransactionIdResponse"
-        }, {
-          "$ref" : "#/components/schemas/NewTransactionIdResponse"
-        } ]
-      },
-      "PendingTransactionIdResponse" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/TransactionIdResponse"
-        }, {
-          "$ref" : "#/components/schemas/NewTransactionIdResponse"
         } ]
       },
       "ErrorTransactionIdResponse" : {
@@ -1902,38 +1934,6 @@
           "properties" : {
             "ErrorResponse" : {
               "$ref" : "#/components/schemas/ErrorResponse"
-            }
-          }
-        } ]
-      },
-      "3DSTransactionIdResponse" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/TransactionIdResponse"
-        }, {
-          "type" : "object",
-          "required" : [ "acsUrl", "PaRes", "MD" ],
-          "properties" : {
-            "acsUrl" : {
-              "$ref" : "#/components/schemas/acsUrl"
-            },
-            "PaRes" : {
-              "$ref" : "#/components/schemas/PaRes"
-            },
-            "MD" : {
-              "$ref" : "#/components/schemas/MD"
-            }
-          }
-        } ]
-      },
-      "RedirectTransactionIdResponse" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/TransactionIdResponse"
-        }, {
-          "type" : "object",
-          "required" : [ "TransactionId" ],
-          "properties" : {
-            "TransactionId" : {
-              "$ref" : "#/components/schemas/TransactionId"
             }
           }
         } ]
