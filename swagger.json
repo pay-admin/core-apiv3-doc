@@ -515,7 +515,7 @@
         "in" : "header",
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
-        "description" : "Подпись запроса. [Описание](#section/signature)",
+        "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
         "schema" : {
           "type" : "string"
         }
@@ -726,14 +726,9 @@
         "description" : "Флаг операции.",
         "enum" : [ true, false, "3DS", "REDIRECT" ]
       },
-      "TransactionStatus_pay" : {
+      "TransactionStatus" : {
         "type" : "string",
-        "enum" : [ "new", "trusted", "filtered", "preAuthorized3DS", "preAuthorizedAF", "authorized", "voided", "charged", "refunded", "rejected", "error" ],
-        "description" : "Текущее состояние транзакции."
-      },
-      "TransactionStatus_payout" : {
-        "type" : "string",
-        "enum" : [ "new", "trusted", "filtered", "charged", "rejected", "error" ],
+        "enum" : [ "new", "charged", "refunded", "failedrefund", "failed", "rejectedrefund", "rejected", "pending", "frozen", "cancel", "declined", "result_unknown", "filtered" ],
         "description" : "Текущее состояние транзакции."
       },
       "newAmount" : {
@@ -1175,7 +1170,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
+              "$ref" : "#/components/schemas/TransactionStatus"
             },
             "RebillId" : {
               "$ref" : "#/components/schemas/rebillId"
@@ -1236,7 +1231,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
+              "$ref" : "#/components/schemas/TransactionStatus"
             },
             "newAmount" : {
               "$ref" : "#/components/schemas/newAmount"
@@ -1297,7 +1292,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
+              "$ref" : "#/components/schemas/TransactionStatus"
             }
           }
         } ]
@@ -1355,7 +1350,7 @@
               "$ref" : "#/components/schemas/ProcessingCurrency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_pay"
+              "$ref" : "#/components/schemas/TransactionStatus"
             },
             "newAmount" : {
               "$ref" : "#/components/schemas/newAmount"
@@ -1452,7 +1447,7 @@
               "$ref" : "#/components/schemas/Currency"
             },
             "TransactionStatus" : {
-              "$ref" : "#/components/schemas/TransactionStatus_payout"
+              "$ref" : "#/components/schemas/TransactionStatus"
             }
           }
         } ]
@@ -1820,7 +1815,7 @@
       },
       "TransactionIdResponse" : {
         "type" : "object",
-        "required" : [ "TransactionState" ],
+        "required" : [ "TransactionState", "TransactionStatus", "TransactionId", "OrderId" ],
         "discriminator" : {
           "propertyName" : "TransactionState",
           "mapping" : {
@@ -1836,6 +1831,9 @@
           "TransactionState" : {
             "description" : "Состоянии транзакции",
             "type" : "string"
+          },
+          "TransactionStatus" : {
+            "$ref" : "#/components/schemas/TransactionStatus"
           },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
