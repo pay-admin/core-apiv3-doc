@@ -632,11 +632,9 @@
         "description" : "Валюта в формате ISO (USD, EUR, RUR). Буквы (a-zA-Z)."
       },
       "RebillFlag" : {
-        "type" : "integer",
-        "minimum" : 0,
-        "maximum" : 1,
+        "type" : "boolean",
         "description" : "Признак рекуррентного платежа.",
-        "enum" : [ 0, 1 ]
+        "enum" : [ true, false ]
       },
       "ExtraData" : {
         "type" : "object",
@@ -652,12 +650,10 @@
         "minLength" : 1,
         "description" : "Идентификатор рекуррентного платежа."
       },
-      "PaymentType" : {
-        "type" : "integer",
-        "minimum" : 0,
-        "maximum" : 1,
-        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию 0): 1 - использовать тип платежа (BLOCK/PAY) родительской транзакции, 0 - не использовать (всегда PAY).",
-        "enum" : [ 0, 1 ]
+      "PayOnlyFlag" : {
+        "type" : "boolean",
+        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию true): false - использовать тип платежа (BLOCK/PAY) родительской транзакции, true - использовать тип платежа (всегда PAY).",
+        "enum" : [ true, false ]
       },
       "TransactionId" : {
         "type" : "integer",
@@ -969,8 +965,8 @@
           "RebillId" : {
             "$ref" : "#/components/schemas/RebillId"
           },
-          "PaymentType" : {
-            "$ref" : "#/components/schemas/PaymentType"
+          "PayOnlyFlag" : {
+            "$ref" : "#/components/schemas/PayOnlyFlag"
           }
         }
       },
