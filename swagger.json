@@ -755,7 +755,7 @@
         "minLength" : 3,
         "description" : "Код валюты в которой операция была проведена в банке. Соответствует полученному от процессинга."
       },
-      "acsUrl" : {
+      "AcsUrl" : {
         "type" : "string",
         "description" : "URL для редиректа."
       },
@@ -835,9 +835,9 @@
         "description" : "Маскированный номер карты."
       },
       "IsTest" : {
-        "description" : "1 - тестовый; 0 - боевой.",
-        "type" : "integer",
-        "enum" : [ 1, 0 ]
+        "description" : "true - тестовый; false - боевой.",
+        "type" : "boolean",
+        "enum" : [ true, false ]
       },
       "Status" : {
         "type" : "string",
@@ -918,8 +918,8 @@
         "discriminator" : {
           "propertyName" : "PaymentMethod",
           "mapping" : {
-            "Card" : "#/components/schemas/CardDetails",
-            "QIWI" : "#/components/schemas/QiWi"
+            "Card" : "#/components/schemas/Card",
+            "Qiwi" : "#/components/schemas/Qiwi"
           }
         },
         "properties" : {
@@ -1561,7 +1561,7 @@
       "PaymentMethod" : {
         "type" : "object"
       },
-      "Details" : {
+      "CardDetails" : {
         "type" : "object",
         "properties" : {
           "CardNumber" : {
@@ -1581,27 +1581,32 @@
           }
         }
       },
-      "CardDetails" : {
+      "Card" : {
         "required" : [ "CardNumber", "ExpMonth", "ExpYear", "CVC", "CardholderName" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPaymentRequest"
         }, {
           "type" : "object",
           "properties" : {
-            "Details" : {
-              "$ref" : "#/components/schemas/Details"
+            "CardDetails" : {
+              "$ref" : "#/components/schemas/CardDetails"
             }
           }
         } ]
       },
-      "QiWi" : {
+      "Qiwi" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPaymentRequest"
         }, {
           "type" : "object",
           "properties" : {
-            "QiwiNumber" : {
-              "$ref" : "#/components/schemas/QiwiNumber"
+            "QiwiDetails" : {
+              "type" : "object",
+              "properties" : {
+                "QiwiNumber" : {
+                  "$ref" : "#/components/schemas/QiwiNumber"
+                }
+              }
             }
           }
         } ]
@@ -1981,10 +1986,10 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
-          "required" : [ "acsUrl", "PaRes", "MD" ],
+          "required" : [ "AcsUrl", "PaRes", "MD" ],
           "properties" : {
-            "acsUrl" : {
-              "$ref" : "#/components/schemas/acsUrl"
+            "AcsUrl" : {
+              "$ref" : "#/components/schemas/AcsUrl"
             },
             "PaRes" : {
               "$ref" : "#/components/schemas/PaRes"
