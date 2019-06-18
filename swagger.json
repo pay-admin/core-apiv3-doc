@@ -114,7 +114,12 @@
                   "allOf" : [ {
                     "$ref" : "#/components/schemas/NewPaymentResponse"
                   }, {
-                    "$ref" : "#/components/schemas/RebillId"
+                    "type" : "object",
+                    "properties" : {
+                      "RebillId" : {
+                        "$ref" : "#/components/schemas/RebillId"
+                      }
+                    }
                   } ]
                 }
               }
@@ -174,7 +179,12 @@
                   "allOf" : [ {
                     "$ref" : "#/components/schemas/NewPaymentResponse"
                   }, {
-                    "$ref" : "#/components/schemas/RebillId"
+                    "type" : "object",
+                    "properties" : {
+                      "RebillId" : {
+                        "$ref" : "#/components/schemas/RebillId"
+                      }
+                    }
                   } ]
                 }
               }
