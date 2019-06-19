@@ -1166,7 +1166,7 @@
           }
         } ]
       },
-      "XXX" : {
+      "Details" : {
         "type" : "object",
         "required" : [ "TransactionId", "OrderId" ],
         "description" : "Details",
@@ -1179,6 +1179,10 @@
           }
         }
       },
+      "Nothing" : {
+        "type" : "object",
+        "nullable" : true
+      },
       "FalsePaymentResponse" : {
         "type" : "object",
         "required" : [ "Error" ],
@@ -1186,9 +1190,11 @@
           "Error" : {
             "$ref" : "#/components/schemas/ErrorResponse"
           },
-          "XXX" : {
-            "oneOf" : [ { }, {
-              "$ref" : "#/components/schemas/XXX"
+          "Details" : {
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/Nothing"
+            }, {
+              "$ref" : "#/components/schemas/Details"
             } ]
           }
         }
