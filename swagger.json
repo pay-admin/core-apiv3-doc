@@ -542,7 +542,7 @@
     },
     "/webhooks" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "webhooks" ],
         "description" : "Выполняется после того, как оплата была успешно проведена — получена авторизация эмитента. Служит для информирования о проведенном платеже: система отправляет запрос на адрес ТСП с информацией об оплате, а сервис ТСП должен зафиксировать факт платежа.",
         "operationId" : "Webhooks",
         "parameters" : [ {
@@ -1166,8 +1166,18 @@
           }
         } ]
       },
-      "NULL" : {
-        "description" : "NULL"
+      "XXX" : {
+        "type" : "object",
+        "required" : [ "TransactionId", "OrderId" ],
+        "description" : "Details",
+        "properties" : {
+          "OrderId" : {
+            "$ref" : "#/components/schemas/OrderId"
+          },
+          "TransactionId" : {
+            "$ref" : "#/components/schemas/TransactionId"
+          }
+        }
       },
       "FalsePaymentResponse" : {
         "type" : "object",
@@ -1177,9 +1187,7 @@
             "$ref" : "#/components/schemas/ErrorResponse"
           },
           "XXX" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/NULL"
-            }, {
+            "oneOf" : [ { }, {
               "type" : "object",
               "required" : [ "TransactionId", "OrderId" ],
               "description" : "Details",
