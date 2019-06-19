@@ -1158,9 +1158,9 @@
           "$ref" : "#/components/schemas/NewTokenResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1168,18 +1168,18 @@
       },
       "FalsePaymentResponse" : {
         "type" : "object",
-        "required" : [ "ErrorResponse" ],
+        "required" : [ "Error" ],
         "properties" : {
-          "ErrorResponse" : {
+          "Error" : {
             "$ref" : "#/components/schemas/ErrorResponse"
           }
         }
       },
       "DoublePaymentResponse" : {
         "type" : "object",
-        "required" : [ "ErrorResponse" ],
+        "required" : [ "Error" ],
         "properties" : {
-          "ErrorResponse" : {
+          "Error" : {
             "$ref" : "#/components/schemas/ErrorResponse"
           },
           "XXX" : {
@@ -1249,9 +1249,9 @@
           "$ref" : "#/components/schemas/NewRebillResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1310,9 +1310,9 @@
           "$ref" : "#/components/schemas/NewRefundResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1368,9 +1368,9 @@
           "$ref" : "#/components/schemas/NewCancelResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1432,9 +1432,9 @@
           "$ref" : "#/components/schemas/NewChargeResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1467,9 +1467,9 @@
           "$ref" : "#/components/schemas/NewUnsubscribeResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1523,9 +1523,9 @@
           "$ref" : "#/components/schemas/NewPayoutResponse"
         }, {
           "type" : "object",
-          "required" : [ "ErrorResponse" ],
+          "required" : [ "Error" ],
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1632,12 +1632,12 @@
       },
       "ErrorResponse" : {
         "type" : "object",
-        "required" : [ "ErrorCode", "ErrorDescription" ],
+        "required" : [ "Code", "Description" ],
         "properties" : {
-          "ErrorCode" : {
+          "Code" : {
             "$ref" : "#/components/schemas/ErrorCode"
           },
-          "ErrorDescription" : {
+          "Description" : {
             "$ref" : "#/components/schemas/ErrorDescription"
           }
         }
@@ -1880,13 +1880,13 @@
         } ]
       },
       "ErrorBalanceResponse" : {
-        "required" : [ "ErrorResponse" ],
+        "required" : [ "Error" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/BalanceResponse"
         }, {
           "type" : "object",
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -1965,13 +1965,13 @@
         } ]
       },
       "ErrorTransactionIdResponse" : {
-        "required" : [ "ErrorResponse" ],
+        "required" : [ "Error" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
           "properties" : {
-            "ErrorResponse" : {
+            "Error" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
