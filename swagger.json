@@ -1212,10 +1212,13 @@
       },
       "DoublePaymentResponse" : {
         "type" : "object",
-        "required" : [ "Error" ],
+        "required" : [ "AddDetails", "Code", "Description" ],
         "properties" : {
-          "Error" : {
-            "$ref" : "#/components/schemas/ErrorResponse"
+          "Code" : {
+            "$ref" : "#/components/schemas/ErrorCode"
+          },
+          "Description" : {
+            "$ref" : "#/components/schemas/ErrorDescription"
           },
           "AddDetails" : {
             "type" : "object",
@@ -1643,7 +1646,7 @@
         } ]
       },
       "PayoutCard" : {
-        "required" : [ "CardNumber", "CardHolder" ],
+        "required" : [ "PayoutDetails" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPayoutRequest"
         }, {
@@ -1651,6 +1654,7 @@
           "properties" : {
             "PayoutDetails" : {
               "type" : "object",
+              "required" : [ "CardNumber", "CardholderName" ],
               "properties" : {
                 "CardNumber" : {
                   "$ref" : "#/components/schemas/CardNumber"
