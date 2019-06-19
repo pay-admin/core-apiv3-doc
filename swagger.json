@@ -1166,7 +1166,7 @@
           }
         } ]
       },
-      "Details" : {
+      "AddDetails" : {
         "type" : "object",
         "required" : [ "TransactionId", "OrderId" ],
         "description" : "qwe",
@@ -1192,11 +1192,11 @@
           "Error" : {
             "$ref" : "#/components/schemas/ErrorResponse"
           },
-          "Details" : {
+          "AddDetails" : {
             "oneOf" : [ {
               "$ref" : "#/components/schemas/AnyValue"
             }, {
-              "$ref" : "#/components/schemas/Details"
+              "$ref" : "#/components/schemas/AddDetails"
             } ]
           }
         }
@@ -1208,7 +1208,7 @@
           "Error" : {
             "$ref" : "#/components/schemas/ErrorResponse"
           },
-          "XXX" : {
+          "AddDetails" : {
             "type" : "object",
             "required" : [ "TransactionId", "OrderId" ],
             "properties" : {
