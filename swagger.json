@@ -1182,7 +1182,8 @@
       "AnyValue" : {
         "type" : "object",
         "nullable" : true,
-        "description" : "Can be any values, including `null`."
+        "description" : "Can be any values, including `null`.",
+        "title" : "NULL"
       },
       "FalsePaymentResponse" : {
         "type" : "object",
