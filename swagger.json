@@ -241,7 +241,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/NewRebillResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -319,7 +319,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/NewRefundResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -365,7 +365,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/NewCancelResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -411,7 +411,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/NewChargeResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -496,7 +496,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/NewPayoutResponse"
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
