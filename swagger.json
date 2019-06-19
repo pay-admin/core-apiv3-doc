@@ -1044,14 +1044,16 @@
       },
       "NewPayoutRequest" : {
         "type" : "object",
-        "required" : [ "CardNumber", "CardholderName", "OrderId", "Amount", "Currency", "Description" ],
+        "required" : [ "OrderId", "Amount", "Currency", "Description", "PayoutMethod" ],
+        "discriminator" : {
+          "propertyName" : "PayoutMethod",
+          "mapping" : {
+            "Card" : "#/components/schemas/PayoutCard",
+            "Qiwi" : "#/components/schemas/PayoutQiwi",
+            "Phone" : "#/components/schemas/PayoutPhone"
+          }
+        },
         "properties" : {
-          "CardNumber" : {
-            "$ref" : "#/components/schemas/CardNumber"
-          },
-          "CardholderName" : {
-            "$ref" : "#/components/schemas/CardHolder"
-          },
           "OrderId" : {
             "$ref" : "#/components/schemas/OrderId"
           },
@@ -1069,6 +1071,10 @@
           },
           "ExtraData" : {
             "$ref" : "#/components/schemas/ExtraData"
+          },
+          "PayoutMethod" : {
+            "description" : "Payout Method",
+            "type" : "string"
           }
         }
       },
@@ -1630,6 +1636,61 @@
               "properties" : {
                 "QiwiNumber" : {
                   "$ref" : "#/components/schemas/QiwiNumber"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "PayoutCard" : {
+        "required" : [ "CardNumber", "CardHolder" ],
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPayoutRequest"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "PayoutDetails" : {
+              "type" : "object",
+              "properties" : {
+                "CardNumber" : {
+                  "$ref" : "#/components/schemas/CardNumber"
+                },
+                "CardholderName" : {
+                  "$ref" : "#/components/schemas/CardHolder"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "PayoutQiwi" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPayoutRequest"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "PayoutDetails" : {
+              "type" : "object",
+              "properties" : {
+                "QiwiNumber" : {
+                  "$ref" : "#/components/schemas/QiwiNumber"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "PayoutPhone" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewPayoutRequest"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "PayoutDetails" : {
+              "type" : "object",
+              "properties" : {
+                "PhoneNumber" : {
+                  "$ref" : "#/components/schemas/Phone"
                 }
               }
             }
