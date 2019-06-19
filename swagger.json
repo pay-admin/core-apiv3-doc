@@ -1184,8 +1184,10 @@
           },
           "XXX" : {
             "type" : "object",
+            "description" : "qwe",
             "oneOf" : [ { }, {
               "required" : [ "TransactionId", "OrderId" ],
+              "description" : "NULL",
               "properties" : {
                 "OrderId" : {
                   "$ref" : "#/components/schemas/OrderId"
