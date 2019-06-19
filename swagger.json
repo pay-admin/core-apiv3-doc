@@ -1166,6 +1166,9 @@
           }
         } ]
       },
+      "NULL" : {
+        "description" : "NULL"
+      },
       "FalsePaymentResponse" : {
         "type" : "object",
         "required" : [ "Error" ],
@@ -1174,10 +1177,8 @@
             "$ref" : "#/components/schemas/ErrorResponse"
           },
           "XXX" : {
-            "type" : "object",
             "oneOf" : [ {
-              "type" : "object",
-              "description" : "NULL"
+              "$ref" : "#/components/schemas/NULL"
             }, {
               "type" : "object",
               "required" : [ "TransactionId", "OrderId" ],
