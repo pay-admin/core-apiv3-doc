@@ -1184,15 +1184,17 @@
           },
           "XXX" : {
             "type" : "object",
-            "required" : [ "TransactionId", "OrderId" ],
-            "properties" : {
-              "OrderId" : {
-                "$ref" : "#/components/schemas/OrderId"
-              },
-              "TransactionId" : {
-                "$ref" : "#/components/schemas/TransactionId"
+            "oneOf" : [ { }, {
+              "required" : [ "TransactionId", "OrderId" ],
+              "properties" : {
+                "OrderId" : {
+                  "$ref" : "#/components/schemas/OrderId"
+                },
+                "TransactionId" : {
+                  "$ref" : "#/components/schemas/TransactionId"
+                }
               }
-            }
+            } ]
           }
         }
       },
