@@ -1610,7 +1610,7 @@
         }, {
           "type" : "object",
           "properties" : {
-            "CardDetails" : {
+            "PaymentDetails" : {
               "$ref" : "#/components/schemas/CardDetails"
             }
           }
@@ -1622,7 +1622,7 @@
         }, {
           "type" : "object",
           "properties" : {
-            "QiwiDetails" : {
+            "PaymentDetails" : {
               "type" : "object",
               "properties" : {
                 "QiwiNumber" : {
