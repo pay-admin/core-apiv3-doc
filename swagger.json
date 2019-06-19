@@ -1187,7 +1187,7 @@
       },
       "FalsePaymentResponse" : {
         "type" : "object",
-        "required" : [ "Error", "Code", "Description" ],
+        "required" : [ "AddDetails", "Code", "Description" ],
         "properties" : {
           "Code" : {
             "$ref" : "#/components/schemas/ErrorCode"
