@@ -741,7 +741,8 @@
         "description" : "IP Address"
       },
       "ProcessingAmount" : {
-        "type" : "integer",
+        "type" : "string",
+        "example" : "123.45",
         "maxLength" : 12,
         "minLength" : 1,
         "description" : "Сумма платежа в валюте в которой операция была проведена в банке. Соответствует полученному от процессинга."
@@ -799,10 +800,11 @@
         "description" : "Текущее состояние транзакции."
       },
       "newAmount" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Остаток суммы."
+        "description" : "Остаток суммы.",
+        "example" : "10.05"
       },
       "ErrorCode" : {
         "type" : "string",
