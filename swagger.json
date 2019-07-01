@@ -2007,7 +2007,7 @@
             "pending" : "#/components/schemas/PendingTransactionIdResponse",
             "declined" : "#/components/schemas/ErrorTransactionIdResponse",
             "wait_for_3ds" : "#/components/schemas/3DSTransactionIdResponse",
-            "redirect" : "#/components/schemas/RedirectTransactionIdResponse"
+            "redirect" : "#/components/schemas/TransactionIdResponse"
           }
         },
         "properties" : {
@@ -2028,19 +2028,24 @@
       },
       "NewTransactionIdResponse" : {
         "type" : "object",
-        "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
         "properties" : {
-          "Amount" : {
-            "$ref" : "#/components/schemas/Amount"
-          },
-          "Currency" : {
-            "$ref" : "#/components/schemas/Currency"
-          },
-          "ProcessingAmount" : {
-            "$ref" : "#/components/schemas/ProcessingAmount"
-          },
-          "ProcessingCurrency" : {
-            "$ref" : "#/components/schemas/ProcessingCurrency"
+          "TransactionDetails" : {
+            "type" : "object",
+            "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
+            "properties" : {
+              "Amount" : {
+                "$ref" : "#/components/schemas/Amount"
+              },
+              "Currency" : {
+                "$ref" : "#/components/schemas/Currency"
+              },
+              "ProcessingAmount" : {
+                "$ref" : "#/components/schemas/ProcessingAmount"
+              },
+              "ProcessingCurrency" : {
+                "$ref" : "#/components/schemas/ProcessingCurrency"
+              }
+            }
           }
         }
       },
@@ -2086,16 +2091,21 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
-          "required" : [ "AcsUrl", "PaRes", "MD" ],
           "properties" : {
-            "AcsUrl" : {
-              "$ref" : "#/components/schemas/AcsUrl"
-            },
-            "PaRes" : {
-              "$ref" : "#/components/schemas/PaRes"
-            },
-            "MD" : {
-              "$ref" : "#/components/schemas/MD"
+            "3DSDetails" : {
+              "type" : "object",
+              "required" : [ "AcsUrl", "PaRes", "MD" ],
+              "properties" : {
+                "AcsUrl" : {
+                  "$ref" : "#/components/schemas/AcsUrl"
+                },
+                "PaRes" : {
+                  "$ref" : "#/components/schemas/PaRes"
+                },
+                "MD" : {
+                  "$ref" : "#/components/schemas/MD"
+                }
+              }
             }
           }
         } ]
