@@ -2029,7 +2029,7 @@
       "NewTransactionIdResponse" : {
         "type" : "object",
         "properties" : {
-          "TransactionDetails" : {
+          "StatusDetails" : {
             "type" : "object",
             "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
             "properties" : {
@@ -2080,7 +2080,7 @@
         }, {
           "type" : "object",
           "properties" : {
-            "Error" : {
+            "StatusDetails" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -2092,7 +2092,7 @@
         }, {
           "type" : "object",
           "properties" : {
-            "TransactionDetails" : {
+            "StatusDetails" : {
               "type" : "object",
               "required" : [ "AcsUrl", "PaRes", "MD" ],
               "properties" : {
@@ -2116,7 +2116,7 @@
         }, {
           "type" : "object",
           "properties" : {
-            "TransactionDetails" : {
+            "StatusDetails" : {
               "type" : "object"
             }
           }
