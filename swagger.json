@@ -515,7 +515,7 @@
       }
     },
     "/balance" : {
-      "post" : {
+      "get" : {
         "tags" : [ "gateway" ],
         "description" : "Операция проверки доступного баланса для Payout.",
         "operationId" : "Balance",
