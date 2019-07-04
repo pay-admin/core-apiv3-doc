@@ -2094,13 +2094,13 @@
           "properties" : {
             "StatusDetails" : {
               "type" : "object",
-              "required" : [ "AcsUrl", "PaRes", "MD" ],
+              "required" : [ "AcsUrl", "PaReq", "MD" ],
               "properties" : {
                 "AcsUrl" : {
                   "$ref" : "#/components/schemas/AcsUrl"
                 },
-                "PaRes" : {
-                  "$ref" : "#/components/schemas/PaRes"
+                "PaReq" : {
+                  "$ref" : "#/components/schemas/PaReq"
                 },
                 "MD" : {
                   "$ref" : "#/components/schemas/MD"
