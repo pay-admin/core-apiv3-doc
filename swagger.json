@@ -283,10 +283,33 @@
         },
         "responses" : {
           "201" : {
-            "description" : "Created"
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/NewPaymentResponse"
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "RebillId" : {
+                        "$ref" : "#/components/schemas/RebillId"
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
           },
           "400" : {
-            "description" : "Request is not valid"
+            "description" : "Request is not valid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FalsePaymentResponse"
+                }
+              }
+            }
           }
         }
       }
