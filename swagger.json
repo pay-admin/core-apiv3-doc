@@ -1076,7 +1076,7 @@
           "mapping" : {
             "Card" : "#/components/schemas/PayoutCard",
             "Qiwi" : "#/components/schemas/PayoutQiwi",
-            "Phone" : "#/components/schemas/PayoutPhone"
+            "Other" : "#/components/schemas/PayoutOther"
           }
         },
         "properties" : {
@@ -1715,7 +1715,7 @@
           }
         } ]
       },
-      "PayoutPhone" : {
+      "PayoutOther" : {
         "required" : [ "PayoutDetails" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/NewPayoutRequest"
@@ -1723,13 +1723,7 @@
           "type" : "object",
           "properties" : {
             "PayoutDetails" : {
-              "type" : "object",
-              "required" : [ "PhoneNumber" ],
-              "properties" : {
-                "PhoneNumber" : {
-                  "$ref" : "#/components/schemas/Phone"
-                }
-              }
+              "type" : "object"
             }
           }
         } ]
