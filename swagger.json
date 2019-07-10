@@ -2038,9 +2038,6 @@
             "description" : "Состоянии транзакции",
             "type" : "string"
           },
-          "TransactionStatus" : {
-            "$ref" : "#/components/schemas/TransactionStatus"
-          },
           "TransactionId" : {
             "$ref" : "#/components/schemas/TransactionId"
           },
