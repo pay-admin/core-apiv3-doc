@@ -2152,9 +2152,5 @@
         }
       }
     }
-  },
-  "servers" : [ {
-    "description" : "SwaggerHub API Auto Mocking",
-    "url" : "https://virtserver.swaggerhub.com/solbeg-rpc/payment-center/v3"
-  } ]
+  }
 }
