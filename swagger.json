@@ -13,7 +13,7 @@
   "paths" : {
     "/orders/{OrderId}" : {
       "get" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Получение статуса платежей по OrderId.",
         "operationId" : "/orders/{OrderId}:",
         "parameters" : [ {
@@ -49,7 +49,7 @@
     },
     "/transactions/{transactionId}" : {
       "get" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Получение статуса платежа по TransactionId.",
         "operationId" : "/transactions/{transactionId}:",
         "parameters" : [ {
@@ -85,7 +85,7 @@
     },
     "/payments/requests/single" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Одностадийная операция оплаты – денежные средства с карты списываются сразу после ее проведения. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа.",
         "operationId" : "Pay",
         "parameters" : [ {
@@ -150,7 +150,7 @@
     },
     "/payments/requests/block" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Двухстадийная операция оплаты – денежные средства предварительно блокируются на карте. После успешного проведения операции денежные средства блокируются на срок до 7 дней, если в течении 7 дней операцию не подтвердить запросом Charge, то блокировка средств будет автоматически отменена. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа",
         "operationId" : "Block",
         "parameters" : [ {
@@ -215,7 +215,7 @@
     },
     "/payments/requests/rebill" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция автоматического списания средств по ранее «привязанной карте».",
         "operationId" : "Rebill",
         "parameters" : [ {
@@ -261,7 +261,7 @@
     },
     "/payments/confirmation" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Используется для операций Pay или Block с 3DS после получения результатов аутентификации от банка-эмитента для завершения блокировки или платежа.",
         "operationId" : "Сonfirm",
         "parameters" : [ {
@@ -316,7 +316,7 @@
     },
     "/payments/refund" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция возврата средств по ранее проведенной операции Pay.",
         "operationId" : "Refund",
         "parameters" : [ {
@@ -362,7 +362,7 @@
     },
     "/payments/cancellation" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция отмены списания по ранее проведенной операции блокировки средств на карте Block.",
         "operationId" : "Cancel",
         "parameters" : [ {
@@ -408,7 +408,7 @@
     },
     "/payments/charge" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция списания средств по ранее проведенной операции блокировки средств на карте Block.",
         "operationId" : "Charge",
         "parameters" : [ {
@@ -454,7 +454,7 @@
     },
     "/payments/unsubscribe" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция отписки от рекуррентного платежа.",
         "operationId" : "Unsubscribe",
         "parameters" : [ {
@@ -493,7 +493,7 @@
     },
     "/payouts" : {
       "post" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция выплаты денежных средств на карту получателя – денежные средства зачисляются на карту получателя в течении двух банковских дней.",
         "operationId" : "Payout",
         "parameters" : [ {
@@ -539,7 +539,7 @@
     },
     "/balance" : {
       "get" : {
-        "tags" : [ "gateway" ],
+        "tags" : [ "operations" ],
         "description" : "Операция проверки доступного баланса для Payout.",
         "operationId" : "Balance",
         "parameters" : [ {
