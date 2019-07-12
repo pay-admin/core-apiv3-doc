@@ -575,8 +575,6 @@
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
         }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
           "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
@@ -613,6 +611,15 @@
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
         "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-WEBHOOK-SIGNATURE" : {
+        "in" : "header",
+        "name" : "X-WEBHOOK-SIGNATURE",
+        "required" : true,
+        "description" : "Подпись Webhook. Вычесляется так же как и [Цифровая подпись запроса](#section/Cifrovaya-podpis-zaprosa), только без X-REQUEST-ID.",
         "schema" : {
           "type" : "string"
         }
