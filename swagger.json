@@ -575,7 +575,7 @@
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
         }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
+          "$ref" : "#/components/parameters/X-WEBHOOK-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
