@@ -692,8 +692,8 @@
       },
       "TransactionId" : {
         "type" : "string",
-        "maxLength" : 20,
-        "minLength" : 10,
+        "maxLength" : 15,
+        "minLength" : 15,
         "description" : "Идентификатор транзакции в системе."
       },
       "QiwiNumber" : {
