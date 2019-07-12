@@ -1855,7 +1855,7 @@
         }
       },
       "PaymentsWebhook" : {
-        "required" : [ "CardMasked", "Status" ],
+        "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1880,7 +1880,7 @@
         } ]
       },
       "FailWebhook" : {
-        "required" : [ "CardMasked", "Status", "ErrorMessage" ],
+        "required" : [ "CardMasked", "ErrorMessage" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1952,7 +1952,7 @@
         } ]
       },
       "PayoutWebhook" : {
-        "required" : [ "CardMasked", "Status" ],
+        "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
