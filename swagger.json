@@ -691,9 +691,9 @@
         "enum" : [ true, false ]
       },
       "TransactionId" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 20,
-        "minLength" : 1,
+        "minLength" : 10,
         "description" : "Идентификатор транзакции в системе."
       },
       "QiwiNumber" : {
