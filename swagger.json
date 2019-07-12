@@ -1812,8 +1812,8 @@
             "Payment" : "#/components/schemas/PaymentsWebhook",
             "Fail" : "#/components/schemas/FailWebhook",
             "Refund" : "#/components/schemas/RefundWebhook",
-            "Void" : "#/components/schemas/VoidWebhook",
-            "Receipt" : "#/components/schemas/ReceiptWebhook",
+            "Cancel" : "#/components/schemas/CancelWebhook",
+            "Payout" : "#/components/schemas/PayoutWebhook",
             "3DS" : "#/components/schemas/3DSWebhook"
           }
         },
@@ -1867,14 +1867,8 @@
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
             },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
-            },
             "RebillId" : {
               "$ref" : "#/components/schemas/RebillId"
-            },
-            "Token" : {
-              "$ref" : "#/components/schemas/Token"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1900,9 +1894,6 @@
             },
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
-            },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1938,7 +1929,7 @@
           }
         } ]
       },
-      "VoidWebhook" : {
+      "CancelWebhook" : {
         "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
@@ -1960,18 +1951,21 @@
           }
         } ]
       },
-      "ReceiptWebhook" : {
-        "required" : [ "newAmount", "Status", "Email", "Phone" ],
+      "PayoutWebhook" : {
+        "required" : [ "CardMasked", "Status" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
           "type" : "object",
           "properties" : {
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
+            "CardMasked" : {
+              "$ref" : "#/components/schemas/CardMasked"
             },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
+            "CardHolder" : {
+              "$ref" : "#/components/schemas/CardHolder"
+            },
+            "RRN" : {
+              "$ref" : "#/components/schemas/RRN"
             }
           }
         } ]
