@@ -570,7 +570,7 @@
     "/webhooks" : {
       "post" : {
         "tags" : [ "webhooks" ],
-        "description" : "Выполняется после того, как оплата была успешно проведена — получена авторизация эмитента. Служит для информирования о проведенном платеже: система отправляет запрос на адрес ТСП с информацией об оплате, а сервис ТСП должен зафиксировать факт платежа.",
+        "description" : "It is executed after the payment has been successfully completed - authorization received from the issuer. It serves to inform about the payment: the system sends a request to the address of the merchant with payment information, and the merchant's service must record the fact of payment.",
         "operationId" : "Webhooks",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
