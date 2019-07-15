@@ -8,7 +8,7 @@
       "altText" : "Gate Express logo"
     },
     "title" : "Gate Express",
-    "description" : "This is sample documentation \"Gate Express\"\n\n\n# Цифровая подпись запроса\n  Все виды сообщений содержат в HTTP заголовоке параметр X-REQUEST-SIGNATURE, в котором находится проверочное значение запроса, вычисленное с помощью алгоритма HMAC. При реализации проверки сообщения, обратите внимание на следующие моменты:\n  \n  Сообщение содержит:\n  \n      1 Метод запроса\n      2 URL\n      3 X-SITE-ID\n      4 X-REQUEST-ID\n      5 Body запроса\n  \n  Например:\n  \n      POST\n      /payments/requests/single\n      16\n      1qazxsw23edc\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n       \n  \n  В качестве ключа используется значение параметра secret, например:\n  \n      \"sk16\" \n  \n  Хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"e31f6486797d4d9677a42b53435f0734ee7eae07799a1cad7569df2a9bf2dfb2\" \n  \n  Сайты для online проверки генерации подписи:\n  \n      http://beautifytools.com/hmac-generator.php\n  \n  Пример формирования X-REQUEST-SIGNATURE (Python):\n  \n      import hashlib\n      import hmac\n\n      def calc_signature(body: str, site_secret_value: str) -> str:\n          signatire = hmac.new(\n            key=site_secret_value.decode(),\n            msg=body.decode(),\n            digestmod=hashlib.sha256,\n          )\n          return signatire.hexdigest()\n      \n      \n  Пример формирования signature (PHP):\n  \n  \n      $requestType = \"/payments/requests/single\";\n      $requestUrl = \"https://ep.gate.express/\" . $requestType;\n  \n      // array for parametres\n      $bodyRequestArray = array(\n          'CardNumber' => \"CREDIT_CARD_NUMBER\", // Without spaces, for example, '4111111111111111'\n          'ExpMonth' => \"EXPIRED_MONTH\", // 2 digits, for example, '05'\n          'ExpYear' => \"EXPIRED_YEAR\", // 2 digits, for example, '24'\n          'CardHolder' => \"CARD_HOLDER_NAME\",                        \n          'CVC' => \"CVC\",\n          'OrderId'   => \"YOUR_ORDER_ID\" \n          'Amount'    => \"AMOUNT\", // digits and dot ('.'), for example, '100.45'\n          'Currency'  => strtoupper(\"CURRENCY\"), // RUB|USD\n          'Description' => \"DESCRIPTION\",\n      );\n  \n      $body = http_build_query($bodyRequestArray);\n      $signature = getSignature($body, \"YOUR_SECRET_KEY\");\n  \n      $ch = curl_init();\n      curl_setopt($ch, CURLOPT_URL, $requestUrl);\n      curl_setopt($ch, CURLOPT_POST, 1);\n      curl_setopt($ch, CURLOPT_POSTFIELDS, $body);  //Post Fields\n      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n  \n      $headers = array(\n          'X-REQUEST-SIGNATURE:'.$signature\n      );\n  \n      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\n  \n      $server_output = curl_exec ($ch);\n  \n      curl_close ($ch);\n  \n      function getSignature($body, $secretKey)\n      {\n          // create signature\n          $hash = hash_hmac('sha256', $body, $secretKey, false);\n          return base64_encode($hash);\n      }\n      \n  \n  \n"
+    "description" : "This is sample documentation \"Gate Express\"\n\n\n# Цифровая подпись запроса\n  Все виды сообщений содержат в HTTP заголовоке параметр X-REQUEST-SIGNATURE, в котором находится проверочное значение запроса, вычисленное с помощью алгоритма HMAC. При реализации проверки сообщения, обратите внимание на следующие моменты:\n  \n  Сообщение содержит:\n  \n      1 Метод запроса\n      2 URL\n      3 X-SITE-ID\n      4 X-REQUEST-ID\n      5 Body запроса\n  \n  Например:\n  \n      POST\n      /payments/requests/single\n      16\n      1qazxsw23edc\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n       \n  \n  В качестве ключа используется значение параметра secret, например:\n  \n      \"sk16\" \n  \n  Хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"e31f6486797d4d9677a42b53435f0734ee7eae07799a1cad7569df2a9bf2dfb2\" \n  \n  Сайты для online проверки генерации подписи:\n  \n      http://beautifytools.com/hmac-generator.php\n  \n  Пример формирования X-REQUEST-SIGNATURE (Python):\n  \n      import hashlib\n      import hmac\n\n      def calc_signature(body: str, site_secret_value: str) -> str:\n          signatire = hmac.new(\n            key=site_secret_value.decode(),\n            msg=body.decode(),\n            digestmod=hashlib.sha256,\n          )\n          return signatire.hexdigest()\n      \n      \n  Пример формирования signature (PHP):\n  \n  \n        function getSignature($body, $secretKey)\n          {\n              $hash = hash_hmac('sha256', $body, $secretKey, false);\n              return $hash;\n          }\n\n\n# Цифровая подпись Webhook\n  X-WEBHOOK-SIGNATURE вычеслятся так же как и [Цифровая подпись запроса](#section/Cifrovaya-podpis-zaprosa), заисключением поля X-REQUEST-ID.\n  \n  Сообщение содержит:\n  \n      1 Метод запроса\n      2 URL\n      3 X-SITE-ID\n      4 Body запроса\n  \n  Например:\n  \n      POST\n      /payments/requests/single\n      16\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n       \n  \n  В качестве ключа используется значение параметра secret, например:\n  \n      \"sk16\" \n  \n  Хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"a45fc5c47ef468889bbb906409c2b93ad8653f7e896ce3f4d4d3f560419af52b\"               \n  \n  \n"
   },
   "paths" : {
     "/orders/{OrderId}" : {
@@ -573,7 +573,7 @@
         }, {
           "$ref" : "#/components/parameters/X-REQUEST-ID"
         }, {
-          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
+          "$ref" : "#/components/parameters/X-WEBHOOK-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -609,6 +609,15 @@
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
         "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-WEBHOOK-SIGNATURE" : {
+        "in" : "header",
+        "name" : "X-WEBHOOK-SIGNATURE",
+        "required" : true,
+        "description" : "Подпись WEBHOOK. [Описание](#section/Cifrovaya-podpis-zaprosa)",
         "schema" : {
           "type" : "string"
         }
@@ -1801,9 +1810,9 @@
             "Payment" : "#/components/schemas/PaymentsWebhook",
             "Fail" : "#/components/schemas/FailWebhook",
             "Refund" : "#/components/schemas/RefundWebhook",
-            "Void" : "#/components/schemas/VoidWebhook",
-            "Receipt" : "#/components/schemas/ReceiptWebhook",
-            "3DS" : "#/components/schemas/3DSWebhook"
+            "Cancel" : "#/components/schemas/CancelWebhook",
+            "3DS" : "#/components/schemas/3DSWebhook",
+            "Payout" : "#/components/schemas/PayoutWebhook"
           }
         },
         "properties" : {
@@ -1844,7 +1853,7 @@
         }
       },
       "PaymentsWebhook" : {
-        "required" : [ "CardMasked", "Status" ],
+        "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1855,9 +1864,6 @@
             },
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
-            },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
             },
             "RebillId" : {
               "$ref" : "#/components/schemas/RebillId"
@@ -1875,7 +1881,7 @@
         } ]
       },
       "FailWebhook" : {
-        "required" : [ "CardMasked", "Status", "ErrorMessage" ],
+        "required" : [ "CardMasked", "ErrorMessage" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1889,9 +1895,6 @@
             },
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
-            },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1927,7 +1930,7 @@
           }
         } ]
       },
-      "VoidWebhook" : {
+      "CancelWebhook" : {
         "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
@@ -1950,7 +1953,7 @@
         } ]
       },
       "ReceiptWebhook" : {
-        "required" : [ "newAmount", "Status", "Email", "Phone" ],
+        "required" : [ "RemainingAmount", "Email", "Phone" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1958,9 +1961,6 @@
           "properties" : {
             "RemainingAmount" : {
               "$ref" : "#/components/schemas/RemainingAmount"
-            },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
             }
           }
         } ]
@@ -1980,6 +1980,25 @@
             },
             "MD" : {
               "$ref" : "#/components/schemas/MD"
+            }
+          }
+        } ]
+      },
+      "PayoutWebhook" : {
+        "required" : [ "CardMasked" ],
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Webhook"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "CardMasked" : {
+              "$ref" : "#/components/schemas/CardMasked"
+            },
+            "CardHolder" : {
+              "$ref" : "#/components/schemas/CardHolder"
+            },
+            "RRN" : {
+              "$ref" : "#/components/schemas/RRN"
             }
           }
         } ]
