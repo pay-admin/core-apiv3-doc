@@ -610,7 +610,7 @@
         "in" : "header",
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
-        "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
+        "description" : "Request signature. [Описание](#section/Cifrovaya-podpis-zaprosa)",
         "schema" : {
           "type" : "string"
         }
@@ -619,7 +619,7 @@
         "in" : "header",
         "name" : "X-WEBHOOK-SIGNATURE",
         "required" : true,
-        "description" : "Подпись Webhook. Вычесляется так же как и [Цифровая подпись запроса](#section/Cifrovaya-podpis-zaprosa), только без X-REQUEST-ID.",
+        "description" : "Webhook signature. Сalculated in the same way as [Request signature](#section/Cifrovaya-podpis-zaprosa), excluding X-REQUEST-ID.",
         "schema" : {
           "type" : "string"
         }
@@ -628,7 +628,7 @@
         "in" : "header",
         "name" : "X-REQUEST-ID",
         "required" : true,
-        "description" : "Уникальный ID запроса у Партнера(мерчанта).",
+        "description" : "Unique merchant ID request.",
         "schema" : {
           "type" : "string"
         }
@@ -639,36 +639,36 @@
         "type" : "string",
         "maxLength" : 100,
         "minLength" : 1,
-        "description" : "Уникальный идентификатор заказа в системе Партнера(мерчанта)."
+        "description" : "Unique merchant order number"
       },
       "Country" : {
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "Код страны, указанной при оформлении карты в банке, в формате ISO."
+        "description" : "Country code of issuer card in ISO."
       },
       "Amount" : {
         "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Сумма к оплате. От 1 до 12 цифр, может содержать десятичный разделитель в виде точки ‘.’.",
+        "description" : "Transaction ammount. From 1 to 12 digits, dot ‘.’ is used as decimal separator.",
         "example" : "123.45"
       },
       "Description" : {
         "type" : "string",
         "maxLength" : 250,
         "minLength" : 1,
-        "description" : "Описание транзакции."
+        "description" : "Transaction description."
       },
       "Currency" : {
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "Валюта в формате ISO (USD, EUR, RUR). Буквы (a-zA-Z)."
+        "description" : "ISO currency in alphabetic code (USD, EUR, etc.)"
       },
       "RebillFlag" : {
         "type" : "boolean",
-        "description" : "Признак рекуррентного платежа.",
+        "description" : "Sign of recurrent payment.",
         "enum" : [ true, false ]
       },
       "ExtraData" : {
