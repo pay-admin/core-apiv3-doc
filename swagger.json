@@ -673,7 +673,7 @@
       },
       "ExtraData" : {
         "type" : "object",
-        "description" : "Дополнительные поля транзакции."
+        "description" : "Transaction additional filds."
       },
       "Extra" : {
         "type" : "object",
