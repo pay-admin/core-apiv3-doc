@@ -1950,19 +1950,6 @@
           }
         } ]
       },
-      "ReceiptWebhook" : {
-        "required" : [ "RemainingAmount", "Email", "Phone" ],
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Webhook"
-        }, {
-          "type" : "object",
-          "properties" : {
-            "RemainingAmount" : {
-              "$ref" : "#/components/schemas/RemainingAmount"
-            }
-          }
-        } ]
-      },
       "3DSWebhook" : {
         "required" : [ "PaRes", "PaReq", "MD" ],
         "allOf" : [ {
