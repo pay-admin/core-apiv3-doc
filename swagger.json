@@ -2058,6 +2058,12 @@
               },
               "ProcessingCurrency" : {
                 "$ref" : "#/components/schemas/ProcessingCurrency"
+              },
+              "newAmount" : {
+                "$ref" : "#/components/schemas/newAmount"
+              },
+              "RebillId" : {
+                "$ref" : "#/components/schemas/RebillId"
               }
             }
           }
@@ -2069,16 +2075,6 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "$ref" : "#/components/schemas/NewTransactionIdResponse"
-        }, {
-          "type" : "object",
-          "properties" : {
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
-            },
-            "RebillId" : {
-              "$ref" : "#/components/schemas/RebillId"
-            }
-          }
         } ]
       },
       "PreauthorizedTransactionIdResponse" : {
