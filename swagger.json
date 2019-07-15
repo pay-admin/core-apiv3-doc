@@ -459,7 +459,7 @@
     "/payments/unsubscribe" : {
       "post" : {
         "tags" : [ "operations" ],
-        "description" : "Операция отписки от рекуррентного платежа.",
+        "description" : "Cancel reccurent payment",
         "operationId" : "Unsubscribe",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -498,7 +498,7 @@
     "/payouts" : {
       "post" : {
         "tags" : [ "operations" ],
-        "description" : "Операция выплаты денежных средств на карту получателя – денежные средства зачисляются на карту получателя в течении двух банковских дней.",
+        "description" : "Credit transaction is a type of transaction, where funds are transferred to cardholder's account. The funds are credited to the card within two banking days.",
         "operationId" : "Payout",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -544,7 +544,7 @@
     "/balance" : {
       "get" : {
         "tags" : [ "operations" ],
-        "description" : "Операция проверки доступного баланса для Payout.",
+        "description" : "The operation checks the available balance for Payout.",
         "operationId" : "Balance",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
