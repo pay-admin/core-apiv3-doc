@@ -47,14 +47,14 @@
         }
       }
     },
-    "/transactions/{transactionId}" : {
+    "/transactions/{TransactionId}" : {
       "get" : {
         "tags" : [ "gateway" ],
         "description" : "Получение статуса платежа по TransactionId.",
         "operationId" : "/transactions/{transactionId}:",
         "parameters" : [ {
           "in" : "path",
-          "name" : "transactionId",
+          "name" : "TransactionId",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -571,8 +571,6 @@
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
         }, {
-          "$ref" : "#/components/parameters/X-REQUEST-ID"
-        }, {
           "$ref" : "#/components/parameters/X-WEBHOOK-SIGNATURE"
         } ],
         "requestBody" : {
@@ -617,7 +615,7 @@
         "in" : "header",
         "name" : "X-WEBHOOK-SIGNATURE",
         "required" : true,
-        "description" : "Подпись WEBHOOK. [Описание](#section/Cifrovaya-podpis-zaprosa)",
+        "description" : "Подпись WEBHOOK. [Описание](#section/Cifrovaya-podpis-WEBHOOK)",
         "schema" : {
           "type" : "string"
         }
