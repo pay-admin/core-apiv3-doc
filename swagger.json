@@ -51,7 +51,7 @@
       "get" : {
         "tags" : [ "gateway" ],
         "description" : "Получение статуса платежа по TransactionId.",
-        "operationId" : "/transactions/{transactionId}:",
+        "operationId" : "/transactions/{TransactionId}:",
         "parameters" : [ {
           "in" : "path",
           "name" : "TransactionId",
