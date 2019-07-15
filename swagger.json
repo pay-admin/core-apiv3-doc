@@ -8,17 +8,13 @@
       "altText" : "Gate Express logo"
     },
     "title" : "Gate Express",
-    "contact" : {
-      "name" : "API support",
-      "email" : "support@gate.express"
-    },
-    "description" : "Gate Express API specification\n\n# Request signature\n  All types of messages contain the parameter X-REQUEST-SIGNATURE in the HTTP header, which contains the test value of the request, calculated using the HMAC algorithm. When implementing message validation, pay attention to the following points:\n  \n  Message contains:\n  \n      1 Reguest method\n      2 URL\n      3 X-SITE-ID\n      4 X-REQUEST-ID\n      5 Request body\n  \n  Example:\n  \n      POST\n      /payments/requests/single\n      16\n      1qazxsw23edc\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n       \n  \n  Use parameter secret as the key, example:\n  \n      \"sk16\" \n  \n  Hash is calculated by the SHA256 function (we get the data in hexadecimal (!) encoding in lower case):\n  \n      \"e31f6486797d4d9677a42b53435f0734ee7eae07799a1cad7569df2a9bf2dfb2\" \n  \n  Sites for online signature generation verification:\n  \n      http://beautifytools.com/hmac-generator.php\n  \n  X-REQUEST-SIGNATURE sample (Python):\n  \n      import hashlib\n      import hmac\n\n      def calc_signature(body: str, site_secret_value: str) -> str:\n          signatire = hmac.new(\n            key=site_secret_value.decode(),\n            msg=body.decode(),\n            digestmod=hashlib.sha256,\n          )\n          return signatire.hexdigest()\n      \n      \n  Signature sample (PHP):\n      \n      \n      function getSignature($body, $secretKey)\n        {\n            $hash = hash_hmac('sha256', $body, $secretKey, false);\n            return $hash;\n        }\n      \n# Webhook signature\n\n  X-WEBHOOK-SIGNATURE calculated in the same way as [Request signature](#section/Cifrovaya-podpis-zaprosa), excluding X-REQUEST-ID. \n  \n  Message contains:\n  \n      1 Reguest method\n      2 URL\n      3 X-SITE-ID\n      4 Request body\n  \n  Example:\n  \n      POST\n      /payments/requests/single\n      16\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n\n  Hash is calculated by the SHA256 function (we get the data in hexadecimal (!) encoding in lower case):\n  \n      \"a45fc5c47ef468889bbb906409c2b93ad8653f7e896ce3f4d4d3f560419af52b\" \n"
+    "description" : "This is sample documentation \"Gate Express\"\n\n\n# Цифровая подпись запроса\n  Все виды сообщений содержат в HTTP заголовоке параметр X-REQUEST-SIGNATURE, в котором находится проверочное значение запроса, вычисленное с помощью алгоритма HMAC. При реализации проверки сообщения, обратите внимание на следующие моменты:\n  \n  Сообщение содержит:\n  \n      1 Метод запроса\n      2 URL\n      3 X-SITE-ID\n      4 X-REQUEST-ID\n      5 Body запроса\n  \n  Например:\n  \n      POST\n      /payments/requests/single\n      16\n      1qazxsw23edc\n      {\"Amount\": 123, \"Currency\": \"RUB\", \"ExtraData\": {\"custom\": \"field\", \"key\": \"value\"}, \"CustomerInfo\": {\"Address\": \"string\", \"Country\": \"string\", \"Email\": \"string\", \"Language\": \"string\", \"Phone\": \"string\", \"Town\": \"string\", \"ZIP\": \"string\"}, \"Description\": \"string\", \"OrderId\": \"string\", \"PaymentMethod\": \"card\", \"PaymentDetails\": {\"CardholderName\": \"string\", \"CardNumber\": \"4111111111111111\", \"CVC\": \"987\", \"ExpMonth\": \"12\", \"ExpYear\": \"22\"}, \"RebillFlag\": true}\n       \n  \n  В качестве ключа используется значение параметра secret, например:\n  \n      \"sk16\" \n  \n  Хэш вычисляется функцией SHA256 (получаем данные в шестнадцатеричной (!) кодировке в нижнем регистре):\n  \n      \"e31f6486797d4d9677a42b53435f0734ee7eae07799a1cad7569df2a9bf2dfb2\" \n  \n  Сайты для online проверки генерации подписи:\n  \n      http://beautifytools.com/hmac-generator.php\n  \n  Пример формирования X-REQUEST-SIGNATURE (Python):\n  \n      import hashlib\n      import hmac\n\n      def calc_signature(body: str, site_secret_value: str) -> str:\n          signatire = hmac.new(\n            key=site_secret_value.decode(),\n            msg=body.decode(),\n            digestmod=hashlib.sha256,\n          )\n          return signatire.hexdigest()\n      \n      \n  Пример формирования signature (PHP):\n  \n  \n      $requestType = \"/payments/requests/single\";\n      $requestUrl = \"https://ep.gate.express/\" . $requestType;\n  \n      // array for parametres\n      $bodyRequestArray = array(\n          'CardNumber' => \"CREDIT_CARD_NUMBER\", // Without spaces, for example, '4111111111111111'\n          'ExpMonth' => \"EXPIRED_MONTH\", // 2 digits, for example, '05'\n          'ExpYear' => \"EXPIRED_YEAR\", // 2 digits, for example, '24'\n          'CardHolder' => \"CARD_HOLDER_NAME\",                        \n          'CVC' => \"CVC\",\n          'OrderId'   => \"YOUR_ORDER_ID\" \n          'Amount'    => \"AMOUNT\", // digits and dot ('.'), for example, '100.45'\n          'Currency'  => strtoupper(\"CURRENCY\"), // RUB|USD\n          'Description' => \"DESCRIPTION\",\n      );\n  \n      $body = http_build_query($bodyRequestArray);\n      $signature = getSignature($body, \"YOUR_SECRET_KEY\");\n  \n      $ch = curl_init();\n      curl_setopt($ch, CURLOPT_URL, $requestUrl);\n      curl_setopt($ch, CURLOPT_POST, 1);\n      curl_setopt($ch, CURLOPT_POSTFIELDS, $body);  //Post Fields\n      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n  \n      $headers = array(\n          'X-REQUEST-SIGNATURE:'.$signature\n      );\n  \n      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);\n  \n      $server_output = curl_exec ($ch);\n  \n      curl_close ($ch);\n  \n      function getSignature($body, $secretKey)\n      {\n          // create signature\n          $hash = hash_hmac('sha256', $body, $secretKey, false);\n          return base64_encode($hash);\n      }\n      \n  \n  \n"
   },
   "paths" : {
     "/orders/{OrderId}" : {
       "get" : {
-        "tags" : [ "operations" ],
-        "description" : "Get status by OrderId.",
+        "tags" : [ "gateway" ],
+        "description" : "Получение статуса платежей по OrderId.",
         "operationId" : "/orders/{OrderId}:",
         "parameters" : [ {
           "in" : "path",
@@ -53,8 +49,8 @@
     },
     "/transactions/{transactionId}" : {
       "get" : {
-        "tags" : [ "operations" ],
-        "description" : "Get status by TransactionId.",
+        "tags" : [ "gateway" ],
+        "description" : "Получение статуса платежа по TransactionId.",
         "operationId" : "/transactions/{transactionId}:",
         "parameters" : [ {
           "in" : "path",
@@ -89,8 +85,8 @@
     },
     "/payments/requests/single" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "One-step payment operation – funds are deducted from the card immediately after the operation is carried out. Additionally, it is possible to specify rebillFlag for pre-authorization of a recurring payment",
+        "tags" : [ "gateway" ],
+        "description" : "Одностадийная операция оплаты – денежные средства с карты списываются сразу после ее проведения. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа.",
         "operationId" : "Pay",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -154,8 +150,8 @@
     },
     "/payments/requests/block" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Two-step payment operation – funds are blocked on the card. If hold was successful, compete the transaction in 5 days, if you do not confirm the operation with a Charge request within 5 days, the funds will be automatically canceled. Additionally, it is possible to specify rebillFlag for pre-authorization of a recurring payment.",
+        "tags" : [ "gateway" ],
+        "description" : "Двухстадийная операция оплаты – денежные средства предварительно блокируются на карте. После успешного проведения операции денежные средства блокируются на срок до 7 дней, если в течении 7 дней операцию не подтвердить запросом Charge, то блокировка средств будет автоматически отменена. Дополнительно есть возможность задать rebillFlag для предварительной авторизации рекуррентного платежа",
         "operationId" : "Block",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -219,8 +215,8 @@
     },
     "/payments/requests/rebill" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "An operation of automatic funds deduction from a previously linked card.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция автоматического списания средств по ранее «привязанной карте».",
         "operationId" : "Rebill",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -265,8 +261,8 @@
     },
     "/payments/confirmation" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Is used by Pay or Block operations with 3DS Secure after receiving the results of authentication from the bank to complete a one-step\two-step payment operation.",
+        "tags" : [ "gateway" ],
+        "description" : "Используется для операций Pay или Block с 3DS после получения результатов аутентификации от банка-эмитента для завершения блокировки или платежа.",
         "operationId" : "Сonfirm",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -320,8 +316,8 @@
     },
     "/payments/refund" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Only a successful transaction can be refunded.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция возврата средств по ранее проведенной операции Pay.",
         "operationId" : "Refund",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -366,8 +362,8 @@
     },
     "/payments/cancellation" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Unblocking funds on card during the two-step payment operation executed earlier.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция отмены списания по ранее проведенной операции блокировки средств на карте Block.",
         "operationId" : "Cancel",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -412,8 +408,8 @@
     },
     "/payments/charge" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Charge funds from the card during the two-step payment operation executed earlier.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция списания средств по ранее проведенной операции блокировки средств на карте Block.",
         "operationId" : "Charge",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -458,8 +454,8 @@
     },
     "/payments/unsubscribe" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Cancel reccurent payment",
+        "tags" : [ "gateway" ],
+        "description" : "Операция отписки от рекуррентного платежа.",
         "operationId" : "Unsubscribe",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -497,8 +493,8 @@
     },
     "/payouts" : {
       "post" : {
-        "tags" : [ "operations" ],
-        "description" : "Credit transaction is a type of transaction, where funds are transferred to cardholder's account. The funds are credited to the card within two banking days.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция выплаты денежных средств на карту получателя – денежные средства зачисляются на карту получателя в течении двух банковских дней.",
         "operationId" : "Payout",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -543,8 +539,8 @@
     },
     "/balance" : {
       "get" : {
-        "tags" : [ "operations" ],
-        "description" : "The operation checks the available balance for Payout.",
+        "tags" : [ "gateway" ],
+        "description" : "Операция проверки доступного баланса для Payout.",
         "operationId" : "Balance",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -570,12 +566,14 @@
     "/webhooks" : {
       "post" : {
         "tags" : [ "webhooks" ],
-        "description" : "It is executed after the payment has been successfully completed - authorization received from the issuer. It serves to inform about the payment: the system sends a request to the address of the merchant with payment information, and the merchant's service must record the fact of payment.",
+        "description" : "Выполняется после того, как оплата была успешно проведена — получена авторизация эмитента. Служит для информирования о проведенном платеже: система отправляет запрос на адрес ТСП с информацией об оплате, а сервис ТСП должен зафиксировать факт платежа.",
         "operationId" : "Webhooks",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
         }, {
-          "$ref" : "#/components/parameters/X-WEBHOOK-SIGNATURE"
+          "$ref" : "#/components/parameters/X-REQUEST-ID"
+        }, {
+          "$ref" : "#/components/parameters/X-REQUEST-SIGNATURE"
         } ],
         "requestBody" : {
           "required" : true,
@@ -610,16 +608,7 @@
         "in" : "header",
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
-        "description" : "Request signature. [Описание](#section/Cifrovaya-podpis-zaprosa)",
-        "schema" : {
-          "type" : "string"
-        }
-      },
-      "X-WEBHOOK-SIGNATURE" : {
-        "in" : "header",
-        "name" : "X-WEBHOOK-SIGNATURE",
-        "required" : true,
-        "description" : "Webhook signature. Сalculated in the same way as [Request signature](#section/Cifrovaya-podpis-zaprosa), excluding X-REQUEST-ID.",
+        "description" : "Подпись запроса. [Описание](#section/Cifrovaya-podpis-zaprosa)",
         "schema" : {
           "type" : "string"
         }
@@ -628,7 +617,7 @@
         "in" : "header",
         "name" : "X-REQUEST-ID",
         "required" : true,
-        "description" : "Unique merchant ID request.",
+        "description" : "Уникальный ID запроса у Партнера(мерчанта).",
         "schema" : {
           "type" : "string"
         }
@@ -639,45 +628,45 @@
         "type" : "string",
         "maxLength" : 100,
         "minLength" : 1,
-        "description" : "Unique merchant order number"
+        "description" : "Уникальный идентификатор заказа в системе Партнера(мерчанта)."
       },
       "Country" : {
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "Country code of issuer card in ISO."
+        "description" : "Код страны, указанной при оформлении карты в банке, в формате ISO."
       },
       "Amount" : {
         "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Transaction ammount. From 1 to 12 digits, dot ‘.’ is used as decimal separator.",
+        "description" : "Сумма к оплате. От 1 до 12 цифр, может содержать десятичный разделитель в виде точки ‘.’.",
         "example" : "123.45"
       },
       "Description" : {
         "type" : "string",
         "maxLength" : 250,
         "minLength" : 1,
-        "description" : "Transaction description."
+        "description" : "Описание транзакции."
       },
       "Currency" : {
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "ISO currency in alphabetic code (USD, EUR, etc.)"
+        "description" : "Валюта в формате ISO (USD, EUR, RUR). Буквы (a-zA-Z)."
       },
       "RebillFlag" : {
         "type" : "boolean",
-        "description" : "Sign of recurrent payment.",
+        "description" : "Признак рекуррентного платежа.",
         "enum" : [ true, false ]
       },
       "ExtraData" : {
         "type" : "object",
-        "description" : "Transaction additional filds."
+        "description" : "Дополнительные поля транзакции."
       },
       "Extra" : {
         "type" : "object",
-        "description" : "Дополнителные параметры. JSON массив. Может содержать параметры (первые 3 обязательны):\n\n<b>success_url</b> - url для возврата с страницы success;\n<b>decline_url</b> - url для возврата с страницы error;\n<b>cancel_url</b> – url для возврата (кнопка 'Вернуться');\n<b>account_id</b> – для возврата напрямую в ЛК клиента;\n\nПример: \n{\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\n\nВ случае режима с автоматическим редиректом покупателя: \n\n<b>success_url</b> - url для редиректа при успешной операции;\n<b>decline_url</b> - url для редиректа при неуспешной операции;\n"
+        "description" : "Дополнительные параметры. JSON массив. Может содержать параметры (первые 3 обязательны):\n\n<b>success_url</b> - url для возврата с страницы success;\n<b>decline_url</b> - url для возврата с страницы error;\n<b>cancel_url</b> – url для возврата (кнопка 'Вернуться');\n<b>account_id</b> – для возврата напрямую в ЛК клиента;\n\nПример: \n{\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\n\nВ случае режима с автоматическим редиректом покупателя: \n\n<b>success_url</b> - url для редиректа при успешной операции;\n<b>decline_url</b> - url для редиректа при неуспешной операции;\n"
       },
       "RebillId" : {
         "type" : "integer",
@@ -691,9 +680,9 @@
         "enum" : [ true, false ]
       },
       "TransactionId" : {
-        "type" : "string",
-        "maxLength" : 15,
-        "minLength" : 15,
+        "type" : "integer",
+        "maxLength" : 20,
+        "minLength" : 1,
         "description" : "Идентификатор транзакции в системе."
       },
       "QiwiNumber" : {
@@ -1812,8 +1801,8 @@
             "Payment" : "#/components/schemas/PaymentsWebhook",
             "Fail" : "#/components/schemas/FailWebhook",
             "Refund" : "#/components/schemas/RefundWebhook",
-            "Cancel" : "#/components/schemas/CancelWebhook",
-            "Payout" : "#/components/schemas/PayoutWebhook",
+            "Void" : "#/components/schemas/VoidWebhook",
+            "Receipt" : "#/components/schemas/ReceiptWebhook",
             "3DS" : "#/components/schemas/3DSWebhook"
           }
         },
@@ -1855,7 +1844,7 @@
         }
       },
       "PaymentsWebhook" : {
-        "required" : [ "CardMasked" ],
+        "required" : [ "CardMasked", "Status" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1867,8 +1856,14 @@
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
             },
+            "Status" : {
+              "$ref" : "#/components/schemas/Status"
+            },
             "RebillId" : {
               "$ref" : "#/components/schemas/RebillId"
+            },
+            "Token" : {
+              "$ref" : "#/components/schemas/Token"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1880,7 +1875,7 @@
         } ]
       },
       "FailWebhook" : {
-        "required" : [ "CardMasked", "ErrorMessage" ],
+        "required" : [ "CardMasked", "Status", "ErrorMessage" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
@@ -1894,6 +1889,9 @@
             },
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
+            },
+            "Status" : {
+              "$ref" : "#/components/schemas/Status"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1929,7 +1927,7 @@
           }
         } ]
       },
-      "CancelWebhook" : {
+      "VoidWebhook" : {
         "required" : [ "CardMasked" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
@@ -1951,21 +1949,18 @@
           }
         } ]
       },
-      "PayoutWebhook" : {
-        "required" : [ "CardMasked" ],
+      "ReceiptWebhook" : {
+        "required" : [ "newAmount", "Status", "Email", "Phone" ],
         "allOf" : [ {
           "$ref" : "#/components/schemas/Webhook"
         }, {
           "type" : "object",
           "properties" : {
-            "CardMasked" : {
-              "$ref" : "#/components/schemas/CardMasked"
+            "newAmount" : {
+              "$ref" : "#/components/schemas/newAmount"
             },
-            "CardHolder" : {
-              "$ref" : "#/components/schemas/CardHolder"
-            },
-            "RRN" : {
-              "$ref" : "#/components/schemas/RRN"
+            "Status" : {
+              "$ref" : "#/components/schemas/Status"
             }
           }
         } ]
@@ -2074,6 +2069,16 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "$ref" : "#/components/schemas/NewTransactionIdResponse"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "newAmount" : {
+              "$ref" : "#/components/schemas/newAmount"
+            },
+            "RebillId" : {
+              "$ref" : "#/components/schemas/RebillId"
+            }
+          }
         } ]
       },
       "PreauthorizedTransactionIdResponse" : {
@@ -2148,9 +2153,5 @@
         }
       }
     }
-  },
-  "servers" : [ {
-    "description" : "SwaggerHub API Auto Mocking",
-    "url" : "https://ep1.gate.express/v1/"
-  } ]
+  }
 }
