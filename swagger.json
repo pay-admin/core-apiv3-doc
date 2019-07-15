@@ -18,7 +18,7 @@
     "/orders/{OrderId}" : {
       "get" : {
         "tags" : [ "operations" ],
-        "description" : "Получение статуса платежей по OrderId.",
+        "description" : "Get status by OrderId.",
         "operationId" : "/orders/{OrderId}:",
         "parameters" : [ {
           "in" : "path",
@@ -54,7 +54,7 @@
     "/transactions/{transactionId}" : {
       "get" : {
         "tags" : [ "operations" ],
-        "description" : "Получение статуса платежа по TransactionId.",
+        "description" : "Get status by TransactionId.",
         "operationId" : "/transactions/{transactionId}:",
         "parameters" : [ {
           "in" : "path",
