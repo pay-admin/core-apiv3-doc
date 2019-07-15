@@ -822,7 +822,7 @@
         "enum" : [ "new", "charged", "refunded", "failedrefund", "failed", "rejectedrefund", "rejected", "pending", "frozen", "cancel", "declined", "result_unknown", "filtered" ],
         "description" : "Текущее состояние транзакции."
       },
-      "newAmount" : {
+      "RemainingAmount" : {
         "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
@@ -1363,8 +1363,8 @@
             "TransactionStatus" : {
               "$ref" : "#/components/schemas/TransactionStatus"
             },
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
+            "RemainingAmount" : {
+              "$ref" : "#/components/schemas/RemainingAmount"
             }
           }
         } ]
@@ -1482,8 +1482,8 @@
             "TransactionStatus" : {
               "$ref" : "#/components/schemas/TransactionStatus"
             },
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
+            "RemainingAmount" : {
+              "$ref" : "#/components/schemas/RemainingAmount"
             },
             "RebillId" : {
               "$ref" : "#/components/schemas/RebillId"
@@ -1915,8 +1915,8 @@
             "CardHolder" : {
               "$ref" : "#/components/schemas/CardHolder"
             },
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
+            "RemainingAmount" : {
+              "$ref" : "#/components/schemas/RemainingAmount"
             },
             "ExpirationDate" : {
               "$ref" : "#/components/schemas/ExpirationDate"
@@ -1956,8 +1956,8 @@
         }, {
           "type" : "object",
           "properties" : {
-            "newAmount" : {
-              "$ref" : "#/components/schemas/newAmount"
+            "RemainingAmount" : {
+              "$ref" : "#/components/schemas/RemainingAmount"
             },
             "Status" : {
               "$ref" : "#/components/schemas/Status"
@@ -2059,8 +2059,8 @@
               "ProcessingCurrency" : {
                 "$ref" : "#/components/schemas/ProcessingCurrency"
               },
-              "newAmount" : {
-                "$ref" : "#/components/schemas/newAmount"
+              "RemainingAmount" : {
+                "$ref" : "#/components/schemas/RemainingAmount"
               },
               "RebillId" : {
                 "$ref" : "#/components/schemas/RebillId"
