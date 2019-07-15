@@ -615,7 +615,7 @@
         "in" : "header",
         "name" : "X-WEBHOOK-SIGNATURE",
         "required" : true,
-        "description" : "Подпись WEBHOOK. [Описание](#section/Cifrovaya-podpis-Webhook)",
+        "description" : "Подпись Webhook. [Описание](#section/Cifrovaya-podpis-Webhook)",
         "schema" : {
           "type" : "string"
         }
