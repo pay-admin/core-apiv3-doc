@@ -459,7 +459,7 @@
     "/payments/unsubscribe" : {
       "post" : {
         "tags" : [ "operations" ],
-        "description" : "Cancel reccurent payment.",
+        "description" : "Cancel recurrent payment.",
         "operationId" : "Unsubscribe",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -610,7 +610,7 @@
         "in" : "header",
         "name" : "X-REQUEST-SIGNATURE",
         "required" : true,
-        "description" : "Request signature. [Описание](#section/Request-signature)",
+        "description" : "Request signature. [description](#section/Request-signature)",
         "schema" : {
           "type" : "string"
         }
@@ -619,7 +619,7 @@
         "in" : "header",
         "name" : "X-WEBHOOK-SIGNATURE",
         "required" : true,
-        "description" : "Webhook signature. [Описание](#section/Webhook-signature)",
+        "description" : "Webhook signature. [description](#section/Webhook-signature)",
         "schema" : {
           "type" : "string"
         }
@@ -683,7 +683,7 @@
         "type" : "string",
         "maxLength" : 15,
         "minLength" : 15,
-        "description" : "Reccurent payment ID.",
+        "description" : "Recurrent payment ID.",
         "example" : "GE00000000000001"
       },
       "PayOnlyFlag" : {
@@ -739,7 +739,7 @@
       "Email" : {
         "type" : "string",
         "format" : "email",
-        "description" : "customer email, for reccurent payments. This email should not be transferred to the bank, this email to inform customer - saved in the transaction."
+        "description" : "customer email, for recurrent payments. This email should not be transferred to the bank, this email to inform customer - saved in the transaction."
       },
       "Phone" : {
         "type" : "string",
