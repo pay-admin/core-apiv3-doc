@@ -816,25 +816,25 @@
       },
       "redirectTransId" : {
         "type" : "string",
-        "description" : "Идентификатор транзакции с системе банка."
+        "description" : "Bank transaction ID."
       },
       "redirectMethod" : {
         "type" : "string",
-        "description" : "HTTP метод, используемый для редиректа."
+        "description" : "HTTP method for redirect."
       },
       "TransactionState" : {
         "type" : "string",
-        "description" : "Флаг успешности операции."
+        "description" : "Operation result"
       },
       "TODO_CHANGE_FIELD_SUCCESS_LOGIC" : {
         "type" : "string",
-        "description" : "Флаг операции.",
+        "description" : "Operation flag.",
         "enum" : [ true, false, "3DS", "REDIRECT" ]
       },
       "TransactionStatus" : {
         "type" : "string",
         "enum" : [ "new", "charged", "refunded", "failedrefund", "failed", "rejectedrefund", "rejected", "pending", "frozen", "cancel", "declined", "result_unknown", "filtered" ],
-        "description" : "Текущее состояние транзакции."
+        "description" : "Current transaction status."
       },
       "RemainingAmount" : {
         "type" : "string",
