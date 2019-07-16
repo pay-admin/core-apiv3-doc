@@ -812,7 +812,7 @@
       },
       "redirectParams" : {
         "type" : "string",
-        "description" : "Строка параметров, с которыми нужно сделать редирект. Формат строки 'название_параметра_1=значение_параметра_1&название_параметра_2=значение_параметра_2&...'."
+        "description" : "Redirect URI with parameters:parameter_1_name=parameter_1_value&parameter_2_name=parameter_2_value&...."
       },
       "redirectTransId" : {
         "type" : "string",
@@ -840,20 +840,20 @@
         "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Остаток суммы.",
+        "description" : "Remain amount.",
         "example" : "10.05"
       },
       "ErrorCode" : {
         "type" : "string",
-        "description" : "Код ошибки."
+        "description" : "Error code."
       },
       "ErrorDescription" : {
         "type" : "string",
-        "description" : "Описание ошибки."
+        "description" : "Error description."
       },
       "ErrorMessage" : {
         "type" : "string",
-        "description" : "Причина отказа."
+        "description" : "Decline reason."
       },
       "Event" : {
         "type" : "string",
@@ -868,35 +868,35 @@
         "type" : "string",
         "maxLength" : 19,
         "minLength" : 12,
-        "description" : "Маскированный номер карты."
+        "description" : "Masked PAN."
       },
       "IsTest" : {
-        "description" : "true - тестовый; false - боевой.",
+        "description" : "true - test; false - production.",
         "type" : "boolean",
         "enum" : [ true, false ]
       },
       "Status" : {
         "type" : "string",
         "enum" : [ "CHARGED", "BLOCKED" ],
-        "description" : "Статус платежа после авторизации: CHARGED — для одностадийных платежей, BLOCKED — для двухстайдиных."
+        "description" : "Post-authorization payment status: CHARGED for one-step payments, BLOCKED for two-step payments."
       },
       "Token" : {
         "type" : "string",
-        "description" : "Токен для проведения рекарринговых платежей."
+        "description" : "Token for recurring payments."
       },
       "ExpirationDate" : {
         "type" : "string",
-        "description" : "Дата устаревания банковской карты в формате MM/YY."
+        "description" : "Card expired date MM/YY."
       },
       "RRN" : {
         "type" : "string",
-        "description" : "Регистрационный номер транзакции в банке."
+        "description" : "Bank transaction ID."
       },
       "Balance" : {
         "type" : "integer",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Доступный размер Payout на момент запроса."
+        "description" : "Available Payout ammount at the time of request."
       },
       "GenericResponse" : {
         "type" : "object",
@@ -1181,7 +1181,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "Состояние транзакции",
+            "description" : "Transaction status",
             "type" : "string"
           }
         }
@@ -1286,7 +1286,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "Состояние транзакции",
+            "description" : "Transaction state",
             "type" : "string"
           },
           "TransactionId" : {
@@ -1347,7 +1347,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "Состояние транзакции",
+            "description" : "Transaction state",
             "type" : "string"
           },
           "TransactionId" : {
@@ -1408,7 +1408,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "Состояние транзакции",
+            "description" : "Transaction state",
             "type" : "string"
           },
           "TransactionId" : {
@@ -1466,7 +1466,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "TransactionState",
+            "description" : "Transaction state",
             "type" : "string"
           },
           "TransactionId" : {
@@ -1530,7 +1530,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "TransactionState",
+            "description" : "Transaction state",
             "type" : "string"
           }
         }
@@ -2053,7 +2053,7 @@
         },
         "properties" : {
           "TransactionState" : {
-            "description" : "Состоянии транзакции",
+            "description" : "Transaction state",
             "type" : "string"
           },
           "TransactionId" : {
