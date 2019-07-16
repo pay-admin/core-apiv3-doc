@@ -677,18 +677,18 @@
       },
       "Extra" : {
         "type" : "object",
-        "description" : "Дополнительные параметры. JSON массив. Может содержать параметры (первые 3 обязательны):\n\n<b>success_url</b> - url для возврата с страницы success;\n<b>decline_url</b> - url для возврата с страницы error;\n<b>cancel_url</b> – url для возврата (кнопка 'Вернуться');\n<b>account_id</b> – для возврата напрямую в ЛК клиента;\n\nПример: \n{\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\n\nВ случае режима с автоматическим редиректом покупателя: \n\n<b>success_url</b> - url для редиректа при успешной операции;\n<b>decline_url</b> - url для редиректа при неуспешной операции;\n"
+        "description" : "Extra options. JSON array may contain parameters (the first 3 are required):\n\n<b>success_url</b> - success url;\n<b>decline_url</b> - decline url;\n<b>cancel_url</b> – return url (return 'button');\n<b>account_id</b> – to return directly to the client's office;\n\nExample: \n{\"success_url\": \"http://server1.com/\", \"decline_url\": \"http://server2.com/\", \"cancel_url\": \"http://server3.com/\", “account_id”: “1122aass112”}\n\nIn the case of the automatic redirect of the customer: \n\n<b>success_url</b> - url for redirect after a successful transaction;\n<b>decline_url</b> - url for redirect after a decline transaction;\n"
       },
       "RebillId" : {
         "type" : "string",
         "maxLength" : 15,
         "minLength" : 15,
-        "description" : "Идентификатор рекуррентного платежа.",
+        "description" : "Reccurent payment ID.",
         "example" : "GE00000000000001"
       },
       "PayOnlyFlag" : {
         "type" : "boolean",
-        "description" : "Признак учёта типа платежа родительской транзакции. Возможные значения (по умолчанию true): false - использовать тип платежа (BLOCK/PAY) родительской транзакции, true - использовать тип платежа (всегда PAY).",
+        "description" : "A sign of the type of payment of the parent transaction. Possible values (default true): false - use the type of payment (BLOCK/PAY) of the parent transaction, true - use the payment type (always PAY).",
         "enum" : [ true, false ]
       },
       "TransactionId" : {
