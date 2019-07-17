@@ -1779,6 +1779,7 @@
       },
       "CustomerInfo" : {
         "type" : "object",
+        "required" : [ "Ip" ],
         "properties" : {
           "Email" : {
             "$ref" : "#/components/schemas/Email"
