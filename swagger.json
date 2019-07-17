@@ -950,7 +950,7 @@
       },
       "NewPaymentRequest" : {
         "type" : "object",
-        "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "Description" ],
+        "required" : [ "OrderId", "Amount", "Currency", "PaymentMethod", "Description", "CustomerInfo" ],
         "discriminator" : {
           "propertyName" : "PaymentMethod",
           "mapping" : {
@@ -1954,22 +1954,6 @@
           }
         } ]
       },
-      "ReceiptWebhook" : {
-        "required" : [ "newAmount", "Status", "Email", "Phone" ],
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Webhook"
-        }, {
-          "type" : "object",
-          "properties" : {
-            "RemainingAmount" : {
-              "$ref" : "#/components/schemas/RemainingAmount"
-            },
-            "Status" : {
-              "$ref" : "#/components/schemas/Status"
-            }
-          }
-        } ]
-      },
       "3DSWebhook" : {
         "required" : [ "PaRes", "PaReq", "MD" ],
         "allOf" : [ {
@@ -2066,8 +2050,9 @@
       },
       "NewTransactionIdResponse" : {
         "type" : "object",
+        "required" : [ "StateDetails" ],
         "properties" : {
-          "StatusDetails" : {
+          "StateDetails" : {
             "type" : "object",
             "required" : [ "Amount", "Currency", "ProcessingAmount", "ProcessingCurrency" ],
             "properties" : {
@@ -2123,8 +2108,9 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
+          "required" : [ "StateDetails" ],
           "properties" : {
-            "StatusDetails" : {
+            "StateDetails" : {
               "$ref" : "#/components/schemas/ErrorResponse"
             }
           }
@@ -2135,8 +2121,9 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
+          "required" : [ "StateDetails" ],
           "properties" : {
-            "StatusDetails" : {
+            "StateDetails" : {
               "type" : "object",
               "required" : [ "AcsUrl", "PaReq", "MD" ],
               "properties" : {
@@ -2159,8 +2146,9 @@
           "$ref" : "#/components/schemas/TransactionIdResponse"
         }, {
           "type" : "object",
+          "required" : [ "StateDetails" ],
           "properties" : {
-            "StatusDetails" : {
+            "StateDetails" : {
               "type" : "object"
             }
           }
