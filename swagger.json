@@ -639,7 +639,8 @@
         "type" : "string",
         "maxLength" : 100,
         "minLength" : 1,
-        "description" : "Unique merchant order number."
+        "description" : "Unique merchant order number.",
+        "pattern" : "^[a-zA-Z]$"
       },
       "Country" : {
         "type" : "string",
