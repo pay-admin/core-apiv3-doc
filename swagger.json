@@ -90,7 +90,7 @@
     "/payments/requests/single" : {
       "post" : {
         "tags" : [ "operations" ],
-        "description" : "One-step payment operation – funds are deducted from the card immediately after the operation is carried out. Additionally, it is possible to specify rebillFlag for pre-authorization of a recurring payment.",
+        "description" : "One-step payment operation – funds are deducted from the card immediately after the operation is carried out. Additionally, it is possible to specify rebillFlag for enabling a recurring payments.",
         "operationId" : "Pay",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -155,7 +155,7 @@
     "/payments/requests/block" : {
       "post" : {
         "tags" : [ "operations" ],
-        "description" : "Two-step payment operation – funds are blocked on the card. If hold was successful, compete the transaction in 5 days, if you do not confirm the operation with a Charge request within 5 days, the funds will be automatically canceled. Additionally, it is possible to specify rebillFlag for pre-authorization of a recurring payment.",
+        "description" : "Two-step payment operation – funds are blocked on the card. If authorization was successful, compete the transaction in 5 days, if you do not confirm the operation with a Charge request within 5 days, the funds will be automatically canceled. Additionally, it is possible to specify rebillFlag for enabling a recurring payments.",
         "operationId" : "Block",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -570,7 +570,7 @@
     "/webhooks" : {
       "post" : {
         "tags" : [ "webhooks" ],
-        "description" : "It is executed after the payment has been successfully completed - authorization received from the issuer. It serves to inform about the payment: the system sends a request to the address of the merchant with payment information, and the merchant's service must record the fact of payment.",
+        "description" : "It is executed after the payment has been successfully completed - authorization received from the issuer. It serves to inform about the payment: the system sends a request to the web address of the merchant with payment information, and the merchant's service must record the fact of payment.",
         "operationId" : "Webhooks",
         "parameters" : [ {
           "$ref" : "#/components/parameters/X-SITE-ID"
@@ -668,7 +668,7 @@
       },
       "RebillFlag" : {
         "type" : "boolean",
-        "description" : "Sign of recurrent payment.",
+        "description" : "Flag of recurrent payment.",
         "enum" : [ true, false ]
       },
       "ExtraData" : {
@@ -739,14 +739,14 @@
       "Email" : {
         "type" : "string",
         "format" : "email",
-        "description" : "customer email, for recurrent payments. This email should not be transferred to the bank, this email to inform customer - saved in the transaction."
+        "description" : "customer email for recurrent payments. This email should not be transferred to the bank, this email to inform customer - saved in the transaction."
       },
       "Phone" : {
         "type" : "string",
         "maxLength" : 20,
         "minLength" : 10,
-        "description" : "Customer phone '19991231212' (no gaps).",
-        "example" : "19991231212"
+        "description" : "Customer phone in international format '+19991231212' (no gaps).",
+        "example" : "+19991231212"
       },
       "Language" : {
         "type" : "string",
