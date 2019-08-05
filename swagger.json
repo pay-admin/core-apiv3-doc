@@ -773,7 +773,7 @@
         "minLength" : 1,
         "description" : "Customer's postcode, specified when the card is in the bank. It may be present if the cardholder's address verification is supported."
       },
-      "Ip" : {
+      "IP" : {
         "type" : "string",
         "format" : "ipv4",
         "description" : "IP Address"
@@ -1803,8 +1803,8 @@
           "Country" : {
             "$ref" : "#/components/schemas/Country"
           },
-          "Ip" : {
-            "$ref" : "#/components/schemas/Ip"
+          "IP" : {
+            "$ref" : "#/components/schemas/IP"
           }
         }
       },
