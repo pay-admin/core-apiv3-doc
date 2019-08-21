@@ -706,10 +706,11 @@
         "description" : "QIWI Number"
       },
       "CardNumber" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 19,
         "minLength" : 12,
-        "description" : "Card number. 12 to 19 digits without spaces."
+        "description" : "Card number. Luhn validation. 12 to 19 digits without spaces.",
+        "example" : "4129436949329530"
       },
       "ExpMonth" : {
         "type" : "integer",
