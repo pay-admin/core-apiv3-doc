@@ -115,16 +115,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/NewPaymentResponse"
-                  }, {
-                    "type" : "object",
-                    "properties" : {
-                      "RebillId" : {
-                        "$ref" : "#/components/schemas/RebillId"
-                      }
-                    }
-                  } ]
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -180,16 +171,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/NewPaymentResponse"
-                  }, {
-                    "type" : "object",
-                    "properties" : {
-                      "RebillId" : {
-                        "$ref" : "#/components/schemas/RebillId"
-                      }
-                    }
-                  } ]
+                  "$ref" : "#/components/schemas/NewPaymentResponse"
                 }
               }
             }
@@ -1086,7 +1068,7 @@
       },
       "NewPayoutRequest" : {
         "type" : "object",
-        "required" : [ "OrderId", "Amount", "Currency", "Description", "PayoutMethod" ],
+        "required" : [ "OrderId", "Amount", "Currency", "Description", "PayoutMethod", "CustomerInfo" ],
         "discriminator" : {
           "propertyName" : "PayoutMethod",
           "mapping" : {
