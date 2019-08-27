@@ -717,7 +717,8 @@
         "type" : "string",
         "maxLength" : 40,
         "minLength" : 1,
-        "description" : "Cardholder name (on the front of the card). Acceptable symbols[a-Z.,-]."
+        "description" : "Cardholder name (on the front of the card). Acceptable symbols[a-Z.,-].",
+        "example" : "Card Holder"
       },
       "CVC" : {
         "type" : "string",
