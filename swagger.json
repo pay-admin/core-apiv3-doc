@@ -628,7 +628,8 @@
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "Country code of issuer card in ISO."
+        "description" : "Country code of issuer card in ISO.",
+        "example" : "USA"
       },
       "Amount" : {
         "type" : "string",
@@ -647,7 +648,8 @@
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "ISO currency in alphabetic code (USD, EUR, etc.)"
+        "description" : "ISO currency in alphabetic code (USD, EUR, etc.)",
+        "example" : "EUR"
       },
       "RebillFlag" : {
         "type" : "boolean",
@@ -685,7 +687,8 @@
         "type" : "string",
         "maxLength" : 19,
         "minLength" : 12,
-        "description" : "QIWI Number. 12 to 19 digits without spaces."
+        "description" : "QIWI Number. 12 to 19 digits without spaces.",
+        "example" : "79151234567"
       },
       "CardNumber" : {
         "type" : "string",
@@ -700,13 +703,15 @@
         "minLength" : 2,
         "minimum" : 1,
         "maximum" : 12,
-        "description" : "Card expire mounth. 2 figures with a leading zero."
+        "description" : "Card expire mounth. 2 figures with a leading zero.",
+        "example" : "06"
       },
       "ExpYear" : {
         "type" : "string",
         "maxLength" : 2,
         "minLength" : 2,
-        "description" : "Card expire year. Last 2 figures of the year."
+        "description" : "Card expire year. Last 2 figures of the year.",
+        "example" : "22"
       },
       "CardHolder" : {
         "type" : "string",
@@ -718,7 +723,8 @@
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "CVC2/CVV2. 3 digits."
+        "description" : "CVC2/CVV2. 3 digits.",
+        "example" : "789"
       },
       "Email" : {
         "type" : "string",
@@ -736,7 +742,8 @@
         "type" : "string",
         "maxLength" : 5,
         "minLength" : 2,
-        "description" : "Language (For example: en, de)."
+        "description" : "Language (For example: en, de).",
+        "example" : "en"
       },
       "Address" : {
         "type" : "string",
@@ -772,7 +779,8 @@
         "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
-        "description" : "The currency code in which the transaction was transferred to the bank. Matches the result from the processing."
+        "description" : "The currency code in which the transaction was transferred to the bank. Matches the result from the processing.",
+        "example" : "EUR"
       },
       "AcsUrl" : {
         "type" : "string",
@@ -880,7 +888,8 @@
         "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
-        "description" : "Available Payout ammount at the time of request."
+        "description" : "Available Payout ammount at the time of request.",
+        "example" : "10000.00"
       },
       "GenericResponse" : {
         "type" : "object",
