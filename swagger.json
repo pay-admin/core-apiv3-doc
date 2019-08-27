@@ -682,10 +682,10 @@
         "example" : "GE00000000000001"
       },
       "QiwiNumber" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 19,
         "minLength" : 12,
-        "description" : "QIWI Number"
+        "description" : "QIWI Number. 12 to 19 digits without spaces."
       },
       "CardNumber" : {
         "type" : "string",
@@ -695,7 +695,7 @@
         "example" : "4129436949329530"
       },
       "ExpMonth" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 2,
         "minLength" : 2,
         "minimum" : 1,
@@ -703,7 +703,7 @@
         "description" : "Card expire mounth. 2 figures with a leading zero."
       },
       "ExpYear" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 2,
         "minLength" : 2,
         "description" : "Card expire year. Last 2 figures of the year."
@@ -715,7 +715,7 @@
         "description" : "Cardholder name (on the front of the card). Acceptable symbols[a-Z.,-]."
       },
       "CVC" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 3,
         "minLength" : 3,
         "description" : "CVC2/CVV2. 3 digits."
@@ -877,7 +877,7 @@
         "description" : "Bank transaction ID."
       },
       "Balance" : {
-        "type" : "integer",
+        "type" : "string",
         "maxLength" : 12,
         "minLength" : 1,
         "description" : "Available Payout ammount at the time of request."
