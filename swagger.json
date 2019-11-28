@@ -1808,6 +1808,7 @@
           "propertyName" : "Event",
           "mapping" : {
             "Payment" : "#/components/schemas/PaymentsWebhook",
+            "Block" : "#/components/schemas/PaymentsWebhook",
             "Fail" : "#/components/schemas/FailWebhook",
             "Refund" : "#/components/schemas/RefundWebhook",
             "Cancel" : "#/components/schemas/CancelWebhook",
